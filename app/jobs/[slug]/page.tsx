@@ -2,20 +2,21 @@ import { notFound } from 'next/navigation';
 import { mapJobToSchema } from '@/lib/mapJobToSchema';
 import JobClient from './JobClient';
 import { Metadata } from 'next';
-import { cache } from 'react';
 
-// force-static + revalidate=false means: render once per slug on first request,
-// cache forever on Vercel. Cloudflare then caches the HTML on top indefinitely.
-// Only re-renders if you manually call revalidatePath('/jobs/[slug]') when a job changes.
-export const revalidate = false;
-export const dynamic = 'force-static';
+export const dynamic = 'force-static'; // ensures build-time rendering only
+export const revalidate = 31536000; // 1 year (acts as "practically infinite cache")
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-const COMPANIES_URL = 'https://jobs-api.joevicspro.workers.dev/companies';
+const COMPANIES_URL =
+  'https://jobs-api.joevicspro.workers.dev/companies';
 
-// Plain REST fetch — no cookies, no request state, fully static-compatible
-const getJob = cache(async (slug: string) => {
+/**
+ * IMPORTANT:
+ * No cache(), no runtime fetch behavior dependency.
+ * This must execute ONLY at build time.
+ */
+async function getJob(slug: string) {
   const res = await fetch(
     `${SUPABASE_URL}/rest/v1/jobs?slug=eq.${slug}&select=*&limit=1`,
     {
@@ -23,107 +24,96 @@ const getJob = cache(async (slug: string) => {
         apikey: SUPABASE_ANON_KEY,
         Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
       },
-      next: { revalidate: false },
+      cache: 'force-cache',
     }
   );
+
   if (!res.ok) return null;
   const data = await res.json();
   return data[0] || null;
-});
+}
 
-const getCompanies = cache(async () => {
-  try {
-    const res = await fetch(COMPANIES_URL, {
-      next: { revalidate: 604800 },
-    });
-    const data = await res.json();
-    return data.companies || [];
-  } catch (error) {
-    console.error('Failed to fetch companies from Cloudflare:', error);
-    return [];
-  }
-});
+async function getCompanies() {
+  const res = await fetch(COMPANIES_URL, {
+    cache: 'force-cache',
+  });
 
-// Plain REST fetch for related jobs — no createClient(), no cookies
-const getRelatedJobs = cache(async (currentJob: any) => {
-  const thirtyDaysAgo = new Date();
-  thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-  const dateStr = thirtyDaysAgo.toISOString();
+  const data = await res.json();
+  return data.companies || [];
+}
+
+async function getRelatedJobs(job: any) {
+  const dateStr = new Date(Date.now() - 30 * 86400000).toISOString();
 
   const params = new URLSearchParams({
-    select: 'id,title,company,location,category,slug,status,deadline,created_at',
-    category: `eq.${currentJob.category}`,
-    id: `neq.${currentJob.id}`,
+    select:
+      'id,title,company,location,category,slug,status,created_at',
+    category: `eq.${job.category}`,
+    id: `neq.${job.id}`,
     created_at: `gte.${dateStr}`,
     order: 'created_at.desc',
     limit: '10',
   });
 
   const res = await fetch(
-    `${SUPABASE_URL}/rest/v1/jobs?${params.toString()}`,
+    `${SUPABASE_URL}/rest/v1/jobs?${params}`,
     {
       headers: {
         apikey: SUPABASE_ANON_KEY,
         Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
       },
-      next: { revalidate: false },
+      cache: 'force-cache',
     }
   );
-  if (!res.ok) return [];
-  return await res.json();
-});
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  return res.ok ? res.json() : [];
+}
+
+export async function generateMetadata({
+  params,
+}: any): Promise<Metadata> {
   const job = await getJob(params.slug);
   if (!job) return { title: 'Job Not Found' };
 
-  const companyName = typeof job.company === 'string' ? job.company : job.company?.name || 'Company';
-  const titleCore = `${job.title} at ${companyName}`;
-  const description = job.description?.replace(/<[^>]*>/g, '').slice(0, 160) || '';
-  const isNoIndex = job.status === 'expired';
+  const company =
+    typeof job.company === 'string'
+      ? job.company
+      : job.company?.name || 'Company';
 
   return {
-    title: titleCore,
-    description,
-    openGraph: {
-      title: titleCore,
-      description,
-      type: 'website',
-      siteName: 'JobMeter',
-      url: `https://www.jobmeter.app/jobs/${job.slug || job.id}`,
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: titleCore,
-      description,
-    },
+    title: `${job.title} at ${company}`,
+    description:
+      job.description?.replace(/<[^>]*>/g, '').slice(0, 160) || '',
     alternates: {
-      canonical: `https://www.jobmeter.app/jobs/${job.slug || job.id}`,
+      canonical: `https://www.jobmeter.app/jobs/${job.slug}`,
     },
-    robots: isNoIndex
-      ? { index: false, follow: true }
-      : { index: true, follow: true },
   };
 }
 
-export default async function JobPage({ params }: { params: { slug: string } }) {
+export default async function JobPage({ params }: any) {
   const job = await getJob(params.slug);
   if (!job) notFound();
 
-  const companies = await getCompanies();
-  const relatedJobs = await getRelatedJobs(job);
+  const [companies, relatedJobs] = await Promise.all([
+    getCompanies(),
+    getRelatedJobs(job),
+  ]);
+
   const schema = mapJobToSchema(job);
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(schema),
+        }}
       />
-      <JobClient 
-        job={job} 
-        relatedJobs={relatedJobs} 
-        companies={companies} 
+
+      <JobClient
+        job={job}
+        relatedJobs={relatedJobs}
+        companies={companies}
       />
     </>
   );

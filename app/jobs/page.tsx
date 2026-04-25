@@ -1,21 +1,32 @@
 import JobList from '@/components/jobs/JobList';
 import { Metadata } from 'next';
 
-// Cache this page for 30 minutes — matches the Cloudflare worker's cache TTL.
-// Cloudflare (CFA) then caches the rendered HTML on top of this indefinitely.
-// No force-dynamic — that was causing a full Vercel SSR invocation on every visit.
-export const revalidate = 1800;
+export const dynamic = 'force-dynamic'; // ✅ Vercel renders per request, but we rely on Worker cache
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.jobmeter.app';
-const CLOUDFLARE_WORKER_URL = 'https://jobs-api.joevicspro.workers.dev';
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://www.jobmeter.app';
+
+const CLOUDFLARE_WORKER_URL =
+  'https://jobs-api.joevicspro.workers.dev';
 
 export const metadata: Metadata = {
   title: 'Find Jobs Near You — Search & Apply for Open Positions | JobMeter',
-  description: 'Search thousands of jobs from verified employers across Nigeria, UK, US, Canada, UAE and more. Filter by location, role, salary and experience level. Updated daily.',
-  keywords: ['find jobs', 'job search', 'job listings', 'vacancies', 'employment', 'hiring', 'career opportunities', 'job board'],
+  description:
+    'Search thousands of jobs from verified employers across Nigeria, UK, US, Canada, UAE and more. Filter by location, role, salary and experience level. Updated daily.',
+  keywords: [
+    'find jobs',
+    'job search',
+    'job listings',
+    'vacancies',
+    'employment',
+    'hiring',
+    'career opportunities',
+    'job board',
+  ],
   openGraph: {
     title: 'Find Jobs Near You | JobMeter',
-    description: 'Search thousands of jobs from verified employers. Free job search tool.',
+    description:
+      'Search thousands of jobs from verified employers. Free job search tool.',
     type: 'website',
     url: `${siteUrl}/jobs`,
     siteName: 'JobMeter',
@@ -23,7 +34,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Find Jobs Near You | JobMeter',
-    description: 'Search thousands of jobs from verified employers. Free job search tool.',
+    description:
+      'Search thousands of jobs from verified employers. Free job search tool.',
   },
   alternates: {
     canonical: `${siteUrl}/jobs`,
@@ -31,21 +43,20 @@ export const metadata: Metadata = {
 };
 
 /**
- * Fetch jobs directly from the Cloudflare Worker
+ * Fetch jobs directly from Worker (Worker handles caching)
  */
 async function getJobs(): Promise<any[]> {
   try {
     const res = await fetch(CLOUDFLARE_WORKER_URL, {
-      next: { revalidate: 1800 }, // Next.js data cache — matches page revalidate TTL
+      cache: 'no-store', // ✅ IMPORTANT: no Next.js caching layer
     });
 
     if (!res.ok) return [];
 
     const data = await res.json();
-    // Support both { jobs: [] } and direct array responses
-    return Array.isArray(data) ? data : (data.jobs || []);
+    return Array.isArray(data) ? data : data.jobs || [];
   } catch (error) {
-    console.error('Error fetching jobs for SSR:', error);
+    console.error('Error fetching jobs:', error);
     return [];
   }
 }
@@ -53,12 +64,10 @@ async function getJobs(): Promise<any[]> {
 export default async function JobsPage() {
   const jobs = await getJobs();
 
-  // ── JSON-LD: ItemList of top 20 jobs for Google ─────────────────────
   const itemListSchema = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     name: 'Latest Job Openings | JobMeter',
-    description: 'Browse the latest verified job listings across Nigeria, UK, US, Canada, UAE and more.',
     url: `${siteUrl}/jobs`,
     numberOfItems: jobs.length,
     itemListElement: jobs.slice(0, 20).map((job: any, index: number) => ({
@@ -82,15 +91,18 @@ export default async function JobsPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(itemListSchema),
+        }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
       />
 
       <main className="min-h-screen bg-white">
-        {/* Pass the pre-fetched jobs from Cloudflare into the client component */}
         <JobList initialJobs={jobs} />
       </main>
     </>
