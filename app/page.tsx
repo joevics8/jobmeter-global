@@ -66,25 +66,8 @@ async function getLatestJobs() {
   return data || [];
 }
 
-async function getLatestBlogPosts() {
-  const { data, error } = await supabase
-    .from('blogs')
-    .select('id, slug, title, excerpt, created_at')
-    .eq('status', 'published')
-    .order('created_at', { ascending: false })
-    .limit(5);
-
-  if (error) {
-    console.error('Error fetching blog posts:', error);
-    return [];
-  }
-
-  return data || [];
-}
-
 export default async function Home() {
   const jobs = await getLatestJobs();
-  const blogPosts = await getLatestBlogPosts();
 
   // Generate JobPosting schema for featured jobs (first 10)
   const jobPostingSchemas = jobs.slice(0, 10).map((job) => {
@@ -147,7 +130,7 @@ export default async function Home() {
         />
       ))}
 
-      <HomePage jobs={jobs} blogPosts={blogPosts} />
+      <HomePage jobs={jobs} />
     </>
   );
 }
