@@ -1,0 +1,51 @@
+# robots.txt
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /auth/
+Disallow: /dashboard/
+Disallow: /onboarding/
+Disallow: /settings/
+Disallow: /saved/
+Disallow: /cv/view/
+Disallow: /offline.html
+Disallow: /_next/
+Crawl-delay: 10
+
+# ── Job scrapers ─────────────────────────────────────────────────────────────
+User-agent: JobBot
+Disallow: /
+
+User-agent: JobSpider
+Disallow: /
+
+User-agent: JobsCrawler
+Disallow: /
+
+User-agent: Indeed-Crawler
+Disallow: /
+
+User-agent: Glassdoor
+Disallow: /
+
+User-agent: ZipRecruiter
+Disallow: /
+
+# ── Generic script scrapers ──────────────────────────────────────────────────
+User-agent: Python-urllib
+Disallow: /
+
+User-agent: python-requests
+Disallow: /
+
+User-agent: Scrapy
+Disallow: /
+
+User-agent: axios
+Disallow: /
+
+User-agent: node-fetch
+Disallow: /
+
+Sitemap: https://www.jobmeter.app/sitemap.xml
