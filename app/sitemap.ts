@@ -2,7 +2,7 @@ import { createClient } from '@supabase/supabase-js';
 import { MetadataRoute } from 'next';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.remote.jobmeter.app';
-const JOBS_TABLE = 'jobs_global';
+const JOBS_TABLE = 'jobs_gulf';
 const JOBS_PER_SITEMAP = 1000;
 
 /**
@@ -23,12 +23,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'daily',
       priority: 0.9,
     },
-    {
+    /* {
       url: `${siteUrl}/sitemap-locations.xml`,
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 0.9,
     },
+    */
     {
       url: `${siteUrl}/sitemap-content.xml`,
       lastModified: new Date(),
@@ -60,7 +61,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-    // ✅ FIX: Count only active + expired_indexed — must match the filter in route.ts
     const { count, error } = await supabase
       .from(JOBS_TABLE)
       .select('*', { count: 'exact', head: true })
@@ -79,8 +79,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const numberOfSitemaps = Math.ceil(count / JOBS_PER_SITEMAP);
     console.log(`📊 Total jobs: ${count}, Creating ${numberOfSitemaps} job sitemaps`);
 
-    // ✅ FIX: URLs must NOT have .xml — they point to the Next.js route handler at
-    //    app/sitemap-jobs/[page]/route.ts which serves /sitemap-jobs/1, /sitemap-jobs/2, etc.
     const jobSitemaps: MetadataRoute.Sitemap = Array.from(
       { length: numberOfSitemaps },
       (_, i) => ({
