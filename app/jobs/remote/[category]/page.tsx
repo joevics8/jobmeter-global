@@ -134,7 +134,7 @@ export async function generateMetadata({ params }: { params: { category: string 
 
   const title = page.meta_title || `Remote ${page.name} Jobs - Work From Home | JobMeter`;
   const description = page.meta_description || page.description || `Find remote ${page.name} jobs. Work from anywhere.`;
-  const url = `https://www.jobmeter.app/jobs/remote/${page.slug}`;
+  const url = `https://www.global.jobmeter.app/jobs/remote/${page.slug}`;
 
   return {
     title,
@@ -186,10 +186,10 @@ export default async function RemoteCategoryPage({ params }: { params: { categor
     breadcrumb: {
       '@type': 'BreadcrumbList',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.jobmeter.app' },
-        { '@type': 'ListItem', position: 2, name: 'Jobs', item: 'https://www.jobmeter.app/jobs' },
-        { '@type': 'ListItem', position: 3, name: 'Remote Jobs', item: 'https://www.jobmeter.app/jobs/remote' },
-        { '@type': 'ListItem', position: 4, name: h1, item: `https://www.jobmeter.app/jobs/remote/${page.slug}` },
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.global.jobmeter.app' },
+        { '@type': 'ListItem', position: 2, name: 'Jobs', item: 'https://www.global.jobmeter.app/jobs' },
+        { '@type': 'ListItem', position: 3, name: 'Remote Jobs', item: 'https://www.global.jobmeter.app/jobs/remote' },
+        { '@type': 'ListItem', position: 4, name: h1, item: `https://www.global.jobmeter.app/jobs/remote/${page.slug}` },
       ],
     },
   };

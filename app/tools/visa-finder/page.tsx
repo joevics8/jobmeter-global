@@ -214,12 +214,12 @@ export default function VisaFinderPage() {
       </div>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([
-        { "@context": "https://schema.org", "@type": "WebPage", "name": "Jobs with Visa Sponsorship — Find Sponsored Work Abroad, Travel Nurse Jobs & Global Career Opportunities 2026", "description": "Discover jobs with visa sponsorship including travel nurse jobs, travel RN jobs, technology roles with H-1B sponsorship, UK Skilled Worker Visa jobs, Canadian work visa opportunities, and jobs that pay to relocate. The best visa sponsorship jobs platform for internationally mobile professionals worldwide.", "url": "https://jobmeter.app/tools/visa-finder", "inLanguage": "en", "dateModified": new Date().toISOString().split('T')[0], "breadcrumb": { "@type": "BreadcrumbList", "itemListElement": [
+        { "@context": "https://schema.org", "@type": "WebPage", "name": "Jobs with Visa Sponsorship — Find Sponsored Work Abroad, Travel Nurse Jobs & Global Career Opportunities 2026", "description": "Discover jobs with visa sponsorship including travel nurse jobs, travel RN jobs, technology roles with H-1B sponsorship, UK Skilled Worker Visa jobs, Canadian work visa opportunities, and jobs that pay to relocate. The best visa sponsorship jobs platform for internationally mobile professionals worldwide.", "url": "https://global.jobmeter.app/tools/visa-finder", "inLanguage": "en", "dateModified": new Date().toISOString().split('T')[0], "breadcrumb": { "@type": "BreadcrumbList", "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jobmeter.app" },
-          { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://jobmeter.app/tools" },
-          { "@type": "ListItem", "position": 3, "name": "Jobs with Visa Sponsorship Finder", "item": "https://jobmeter.app/tools/visa-finder" },
+          { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://global.jobmeter.app/tools" },
+          { "@type": "ListItem", "position": 3, "name": "Jobs with Visa Sponsorship Finder", "item": "https://global.jobmeter.app/tools/visa-finder" },
         ] } },
-        { "@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Jobs with Visa Sponsorship Finder", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "description": "AI-powered job finder tool for discovering jobs with visa sponsorship including travel nurse jobs, H-1B sponsored tech roles, EB-3 green card nursing jobs, Canadian work visa opportunities, UK Skilled Worker Visa jobs, and jobs that pay to relocate for internationally mobile professionals worldwide.", "url": "https://jobmeter.app/tools/visa-finder", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "description": "Free to use for all job seekers worldwide." }, "featureList": [
+        { "@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Jobs with Visa Sponsorship Finder", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "description": "AI-powered job finder tool for discovering jobs with visa sponsorship including travel nurse jobs, H-1B sponsored tech roles, EB-3 green card nursing jobs, Canadian work visa opportunities, UK Skilled Worker Visa jobs, and jobs that pay to relocate for internationally mobile professionals worldwide.", "url": "https://global.jobmeter.app/tools/visa-finder", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "description": "Free to use for all job seekers worldwide." }, "featureList": [
           "Real-time jobs with visa sponsorship listings", "Travel nurse jobs with EB-3 and TN visa filter", "H-1B sponsored technology and engineering jobs", "Canadian work visa and Express Entry job filter", "UK Skilled Worker Visa jobs filter", "Holiday working visa opportunities", "Jobs that pay to relocate and provide housing", "Sector filters: Healthcare, Tech, Hospitality, Engineering", "Global coverage across US, UK, Canada, Australia, and Europe"
         ], "keywords": "jobs with visa sponsorship, travel nurse jobs, travel RN jobs, H-1B visa jobs, EB-3 green card sponsorship, Canadian work visa, UK Skilled Worker Visa, jobs that pay to relocate, best travel nursing agencies, travel CNA jobs" },
         { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
@@ -230,11 +230,11 @@ export default function VisaFinderPage() {
           { "@type": "Question", "name": "What salary can I expect from jobs with visa sponsorship?", "acceptedAnswer": { "@type": "Answer", "text": "Travel RN jobs offer $48–$85/hour; tech roles average $80,000–$200,000/year; flight attendant roles $45,000–$80,000/year; travel physical therapy jobs $45–$80/hour. Most sponsored roles include relocation allowances, housing stipends, and full visa fee coverage." } },
         ] },
         { "@context": "https://schema.org", "@type": "ItemList", "name": "Related Job Finder Tools on Jobmeter", "description": "Other free job finder tools available on jobmeter.app", "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Remote Jobs Finder", "url": "https://jobmeter.app/tools/remote-jobs-finder" },
-          { "@type": "ListItem", "position": 2, "name": "Internship Finder", "url": "https://jobmeter.app/tools/internship-finder" },
-          { "@type": "ListItem", "position": 3, "name": "NYSC Jobs Finder", "url": "https://jobmeter.app/tools/nysc-finder" },
-          { "@type": "ListItem", "position": 4, "name": "Jobs with Accommodation", "url": "https://jobmeter.app/tools/accommodation-finder" },
-          { "@type": "ListItem", "position": 5, "name": "Entry Level Jobs Finder", "url": "https://jobmeter.app/tools/entry-level-finder" },
+          { "@type": "ListItem", "position": 1, "name": "Remote Jobs Finder", "url": "https://global.jobmeter.app/tools/remote-jobs-finder" },
+          { "@type": "ListItem", "position": 2, "name": "Internship Finder", "url": "https://global.jobmeter.app/tools/internship-finder" },
+          { "@type": "ListItem", "position": 3, "name": "NYSC Jobs Finder", "url": "https://global.jobmeter.app/tools/nysc-finder" },
+          { "@type": "ListItem", "position": 4, "name": "Jobs with Accommodation", "url": "https://global.jobmeter.app/tools/accommodation-finder" },
+          { "@type": "ListItem", "position": 5, "name": "Entry Level Jobs Finder", "url": "https://global.jobmeter.app/tools/entry-level-finder" },
         ] }
       ]) }} />
 

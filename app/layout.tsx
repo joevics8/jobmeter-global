@@ -12,7 +12,7 @@ import { CreditProvider } from '@/context/CreditContext'; // Added import
 
 const inter = Inter({ subsets: ['latin'] });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.jobmeter.app';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.global.jobmeter.app';
 const ogImageUrl = `${siteUrl}/og-image.png`;
 const siteName = 'JobMeter';
 const defaultTitle = 'JobMeter - Find Your Dream Job';

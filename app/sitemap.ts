@@ -1,7 +1,8 @@
 import { createClient } from '@supabase/supabase-js';
 import { MetadataRoute } from 'next';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.jobmeter.app';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.remote.jobmeter.app';
+const JOBS_TABLE = 'jobs_global';
 const JOBS_PER_SITEMAP = 1000;
 
 /**
@@ -61,7 +62,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     // ✅ FIX: Count only active + expired_indexed — must match the filter in route.ts
     const { count, error } = await supabase
-      .from('jobs')
+      .from(JOBS_TABLE)
       .select('*', { count: 'exact', head: true })
       .in('status', ['active', 'expired_indexed']);
 

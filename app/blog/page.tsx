@@ -5,8 +5,6 @@ import Image from 'next/image';
 import { BlogSchema } from '@/components/seo/StructuredData';
 import AdUnit from '@/components/ads/AdUnit';
 
-// Render once at build time, cache forever. Cloudflare caches the HTML on top.
-// When you publish a new blog post, redeploy or call revalidatePath('/blog').
 export const revalidate = false;
 export const dynamic = 'force-static';
 
@@ -21,7 +19,7 @@ export const metadata: Metadata = {
     title: 'Career Blog & Articles | JobMeter',
     description: 'Expert career advice, salary guides, and job search tips for Nigerian professionals.',
     type: 'website',
-    url: 'https://jobmeter.app/blog',
+    url: 'https://global.jobmeter.app/blog',
   },
   twitter: {
     card: 'summary_large_image',
@@ -29,7 +27,7 @@ export const metadata: Metadata = {
     description: 'Expert career advice, salary guides, and job search tips for Nigerian professionals.',
   },
   alternates: {
-    canonical: 'https://jobmeter.app/blog',
+    canonical: 'https://global.jobmeter.app/blog',
   },
 };
 
@@ -51,6 +49,7 @@ async function getBlogPosts(): Promise<BlogPost[]> {
     const params = new URLSearchParams({
       select: 'id,title,slug,excerpt,featured_image_url,category,tags,published_at,view_count,read_time_minutes',
       is_published: 'eq.true',
+      country: 'eq.remote',
       order: 'published_at.desc',
     });
 
@@ -73,36 +72,25 @@ async function getBlogPosts(): Promise<BlogPost[]> {
   }
 }
 
-// Reusable card component to avoid duplication
 function BlogCard({ post, formatDate }: { post: BlogPost; formatDate: (d: string) => string }) {
   return (
     <article className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden border border-gray-200 flex flex-col">
       {post.featured_image_url && (
         <Link href={`/blog/${post.slug}`}>
           <div className="relative w-full h-48 bg-gray-200">
-            <Image
-              src={post.featured_image_url}
-              alt={post.title}
-              fill
-              className="object-cover"
-            />
+            <Image src={post.featured_image_url} alt={post.title} fill className="object-cover" />
           </div>
         </Link>
       )}
-
       <div className="p-6 flex-1 flex flex-col">
         <Link href={`/blog/${post.slug}`}>
           <h3 className="text-xl font-bold text-gray-900 mb-2 hover:text-blue-600 transition-colors line-clamp-2">
             {post.title}
           </h3>
         </Link>
-
         {post.excerpt && (
-          <p className="text-gray-600 text-sm mb-4 line-clamp-3 flex-1">
-            {post.excerpt}
-          </p>
+          <p className="text-gray-600 text-sm mb-4 line-clamp-3 flex-1">{post.excerpt}</p>
         )}
-
         <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
           <div className="flex items-center gap-4 text-xs text-gray-500">
             <div className="flex items-center gap-1">
@@ -116,12 +104,8 @@ function BlogCard({ post, formatDate }: { post: BlogPost; formatDate: (d: string
               </div>
             )}
           </div>
-          <Link
-            href={`/blog/${post.slug}`}
-            className="flex items-center gap-1 text-blue-600 hover:text-blue-700 font-medium text-sm"
-          >
-            Read
-            <ArrowRight size={16} />
+          <Link href={`/blog/${post.slug}`} className="flex items-center gap-1 text-blue-600 hover:text-blue-700 font-medium text-sm">
+            Read <ArrowRight size={16} />
           </Link>
         </div>
       </div>
@@ -134,14 +118,9 @@ export default async function BlogPage() {
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
+    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
   };
 
-  // Chunk posts into groups of 10 for reduced ad density
   const CHUNK_SIZE = 10;
   const postChunks: BlogPost[][] = [];
   for (let i = 0; i < posts.length; i += CHUNK_SIZE) {
@@ -151,16 +130,12 @@ export default async function BlogPage() {
   return (
     <>
       <BlogSchema />
-
       <div className="min-h-screen bg-gray-50">
-        {/* Header */}
         <div className="text-white" style={{ backgroundColor: '#2563EB' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <h1 className="text-3xl font-bold">Career Blog</h1>
           </div>
         </div>
-
-        {/* Breadcrumb */}
         <div className="bg-white border-b border-gray-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <nav className="flex items-center gap-2 text-sm text-gray-600">
@@ -170,15 +145,11 @@ export default async function BlogPage() {
             </nav>
           </div>
         </div>
-
-        {/* Ad: Top */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
           <div className="min-h-[280px] flex items-center justify-center bg-gray-50 rounded">
             <AdUnit slot="4198231153" format="auto" />
           </div>
         </div>
-
-        {/* Main Content */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-20">
           {posts.length === 0 ? (
             <div className="bg-white rounded-lg shadow-sm p-12 text-center">
@@ -193,13 +164,11 @@ export default async function BlogPage() {
                   {chunkIndex === 0 && (
                     <h2 className="text-2xl font-bold text-gray-900 mb-6">Latest Articles</h2>
                   )}
-
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {chunk.map((post) => (
                       <BlogCard key={post.id} post={post} formatDate={formatDate} />
                     ))}
                   </div>
-
                   {chunkIndex < postChunks.length - 1 && (
                     <div className="mt-10">
                       <div className="min-h-[300px] flex items-center justify-center bg-gray-50 rounded">
@@ -209,26 +178,15 @@ export default async function BlogPage() {
                   )}
                 </div>
               ))}
-
-              {/* Bottom Ad - now inside posts block */}
               <div className="min-h-[280px] flex items-center justify-center bg-gray-50 rounded">
                 <AdUnit slot="9751041788" format="auto" />
               </div>
             </div>
           )}
         </div>
-
-        {/* Sticky Mobile Anchor Ad */}
-        <div
-          className="fixed bottom-0 left-0 right-0 z-40 lg:hidden bg-white border-t border-gray-100"
-          style={{ height: '60px', overflow: 'hidden' }}
-        >
+        <div className="fixed bottom-0 left-0 right-0 z-40 lg:hidden bg-white border-t border-gray-100" style={{ height: '60px', overflow: 'hidden' }}>
           <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '60px', overflow: 'hidden' }}>
-            <AdUnit
-              slot="3349195672"
-              format="auto"
-              style={{ display: 'block', width: '100%', height: '60px', maxHeight: '60px', overflow: 'hidden' }}
-            />
+            <AdUnit slot="3349195672" format="auto" style={{ display: 'block', width: '100%', height: '60px', maxHeight: '60px', overflow: 'hidden' }} />
           </div>
         </div>
       </div>

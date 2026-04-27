@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     title: `${job.title} at ${companyName} - UK Jobs`,
     description: job.description?.substring(0, 160) || `Apply for ${job.title} at ${companyName} in the United Kingdom`,
     alternates: {
-      canonical: `https://www.jobmeter.app/jobs/united-kingdom/${slug}`,
+      canonical: `https://www.global.jobmeter.app/jobs/united-kingdom/${slug}`,
     },
   };
 }

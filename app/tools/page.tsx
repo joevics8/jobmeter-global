@@ -7,7 +7,7 @@ import AdUnit from '@/components/ads/AdUnit';
 
 export const revalidate = false;
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.jobmeter.app';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://global.jobmeter.app';
 
 export const metadata: Metadata = {
   title: 'Career Tools — Free AI-Powered Job Search Tools | JobMeter',

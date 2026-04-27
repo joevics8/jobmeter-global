@@ -254,15 +254,15 @@ export default function RemoteJobsPage() {
                 "@type": "WebPage",
                 "name": "Remote Jobs Finder — Find Remote Jobs, Work From Home Jobs & Online Remote Employment",
                 "description": "Use Remote Jobs Finder to discover legitimate remote jobs, work from home jobs, virtual assistant jobs, remote customer service jobs, and online remote employment opportunities worldwide. Entry-level and experienced roles available.",
-                "url": "https://jobmeter.app/tools/remote-jobs-finder",
+                "url": "https://global.jobmeter.app/tools/remote-jobs-finder",
                 "inLanguage": "en",
                 "dateModified": new Date().toISOString().split('T')[0],
                 "breadcrumb": {
                   "@type": "BreadcrumbList",
                   "itemListElement": [
-                    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jobmeter.app" },
-                    { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://jobmeter.app/tools" },
-                    { "@type": "ListItem", "position": 3, "name": "Remote Jobs Finder", "item": "https://jobmeter.app/tools/remote-jobs-finder" },
+                    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://global.jobmeter.app" },
+                    { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://global.jobmeter.app/tools" },
+                    { "@type": "ListItem", "position": 3, "name": "Remote Jobs Finder", "item": "https://global.jobmeter.app/tools/remote-jobs-finder" },
                   ]
                 }
               },
@@ -273,7 +273,7 @@ export default function RemoteJobsPage() {
                 "applicationCategory": "BusinessApplication",
                 "operatingSystem": "Web",
                 "description": "AI-powered remote jobs finder tool for discovering work from home jobs, remote customer service jobs, virtual assistant jobs, remote data entry jobs, and legitimate remote employment opportunities worldwide.",
-                "url": "https://jobmeter.app/tools/remote-jobs-finder",
+                "url": "https://global.jobmeter.app/tools/remote-jobs-finder",
                 "offers": {
                   "@type": "Offer",
                   "price": "0",
@@ -307,11 +307,11 @@ export default function RemoteJobsPage() {
                 "name": "Related Job Finder Tools",
                 "description": "Other free job finder tools available on the platform",
                 "itemListElement": [
-                  { "@type": "ListItem", "position": 1, "name": "Internship Finder", "url": "https://jobmeter.app/tools/internship-finder" },
-                  { "@type": "ListItem", "position": 2, "name": "NYSC Jobs Finder", "url": "https://jobmeter.app/tools/nysc-finder" },
-                  { "@type": "ListItem", "position": 3, "name": "Jobs with Accommodation Finder", "url": "https://jobmeter.app/tools/accommodation-finder" },
-                  { "@type": "ListItem", "position": 4, "name": "Jobs with Visa Sponsorship Finder", "url": "https://jobmeter.app/tools/visa-finder" },
-                  { "@type": "ListItem", "position": 5, "name": "Entry Level Jobs Finder", "url": "https://jobmeter.app/tools/entry-level-finder" },
+                  { "@type": "ListItem", "position": 1, "name": "Internship Finder", "url": "https://global.jobmeter.app/tools/internship-finder" },
+                  { "@type": "ListItem", "position": 2, "name": "NYSC Jobs Finder", "url": "https://global.jobmeter.app/tools/nysc-finder" },
+                  { "@type": "ListItem", "position": 3, "name": "Jobs with Accommodation Finder", "url": "https://global.jobmeter.app/tools/accommodation-finder" },
+                  { "@type": "ListItem", "position": 4, "name": "Jobs with Visa Sponsorship Finder", "url": "https://global.jobmeter.app/tools/visa-finder" },
+                  { "@type": "ListItem", "position": 5, "name": "Entry Level Jobs Finder", "url": "https://global.jobmeter.app/tools/entry-level-finder" },
                 ]
               }
             ])

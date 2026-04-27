@@ -5,7 +5,7 @@ import AdUnit from '@/components/ads/AdUnit';
 
 export const revalidate = false;
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.jobmeter.app';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.global.jobmeter.app';
 
 export const metadata: Metadata = {
   title: 'Jobs in Canada - Find Employment Opportunities | JobMeter',

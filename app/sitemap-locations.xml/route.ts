@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.jobmeter.app';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.global.jobmeter.app';
 
 /**
  * Location sitemap — ONLY generates URLs for pages that actually exist.

@@ -9,7 +9,7 @@ import JobList from '@/components/jobs/JobList';
 import { BreadcrumbListSchema } from '@/components/seo/StructuredData';
 import AdUnit from '@/components/ads/AdUnit';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.jobmeter.app';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.global.jobmeter.app';
 export const revalidate = false;
 export const dynamicParams = true;
 

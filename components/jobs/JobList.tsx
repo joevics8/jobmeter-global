@@ -34,46 +34,27 @@ const AD_SLOTS = {
 } as const;
 // ─────────────────────────────────────────────────────────────────────────────
 
-// ── Site-specific job filter helpers ─────────────────────────────────────────
-const GULF_COUNTRIES = ['uae', 'saudi arabia', 'kuwait', 'qatar', 'bahrain', 'oman', 'jordan', 'egypt', 'lebanon'];
-function getJobCountries(job: any): string[] { return (job.country || []).map((c: string) => c.toLowerCase()); }
-function isJobRemote(job: any): boolean { const loc = job.location; if (!loc) return false; if (typeof loc === 'string') return loc.toLowerCase().includes('remote'); if (typeof loc === 'object') return Boolean(loc.remote); return false; }
-function filterForGlobal(job: any): boolean {
-  const countries = getJobCountries(job);
-  const hasNigeria = countries.includes('nigeria');
-  const hasGulf = countries.some((c: string) => GULF_COUNTRIES.includes(c));
-  // Remote with no country → global only
-  if (isJobRemote(job) && countries.length === 0) return true;
-  // Remote tagged with only nigeria/gulf → belongs to those sites, exclude here
-  if (isJobRemote(job) && countries.length > 0) {
-    const onlyNigeriaOrGulf = countries.every((c: string) => c === 'nigeria' || GULF_COUNTRIES.includes(c));
-    if (onlyNigeriaOrGulf) return false;
-    return true; // remote with at least one non-nigeria/gulf country → global
-  }
-  // Non-remote: exclude if it's purely nigeria or purely gulf
-  if (hasNigeria && !hasGulf && countries.every((c: string) => c === 'nigeria')) return false;
-  if (hasGulf && !hasNigeria && countries.every((c: string) => GULF_COUNTRIES.includes(c))) return false;
-  // Everything else (western countries, no country, mixed) → global
-  return true;
-}
-// ─────────────────────────────────────────────────────────────────────────────
+// Worker handles site filtering via ?site=global
 
-const STORAGE_KEYS = {
-  SAVED_JOBS: 'saved_jobs',
-  APPLIED_JOBS: 'applied_jobs',
-  LATEST_JOBS_CACHE: 'latest_jobs_cache',
-  LATEST_JOBS_CACHE_TS: 'latest_jobs_cache_ts',
-  LATEST_JOBS_CACHE_VERSION: 'latest_jobs_cache_version',
-  MATCHES_CACHE: 'jobs_cache',
-  MATCHES_CACHE_TS: 'jobs_cache_timestamp',
-  MATCHES_CACHE_USER: 'jobs_cache_user_id',
-};
+function getSiteKeys(site: string) {
+  return {
+    SAVED_JOBS: 'saved_jobs',
+    APPLIED_JOBS: 'applied_jobs',
+    LATEST_JOBS_CACHE: `${site}_latest_jobs_cache`,
+    LATEST_JOBS_CACHE_TS: `${site}_latest_jobs_cache_ts`,
+    LATEST_JOBS_CACHE_VERSION: `${site}_latest_jobs_cache_version`,
+    MATCHES_CACHE: `${site}_jobs_cache`,
+    MATCHES_CACHE_TS: `${site}_jobs_cache_timestamp`,
+    MATCHES_CACHE_USER: `${site}_jobs_cache_user_id`,
+  };
+}
 
 const JOBS_PER_PAGE_DISPLAY = 50;
 const CLIENT_CACHE_DURATION = 20 * 60 * 1000;            // 20 min — latest jobs
 const MATCHES_CACHE_DURATION = 7 * 24 * 60 * 60 * 1000; // 7 days — match scores
 
 interface JobListProps {
+  siteType?: 'nigeria' | 'gulf' | 'global';
   initialJobs?: any[];
   initialCountry?: string;
   initialRoleCategory?: string;
@@ -128,18 +109,17 @@ function transformJobToUIStatic(job: any): JobUI {
   };
 }
 
-export default function JobList({ initialJobs, initialCountry, initialRoleCategory, initialJobType, initialState, initialTown }: JobListProps) {
+export default function JobList({ siteType = 'global', initialJobs, initialCountry, initialRoleCategory, initialJobType, initialState, initialTown }: JobListProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const STORAGE_KEYS = getSiteKeys(siteType);
 
   const [activeTab, setActiveTab] = useState<'latest' | 'matches'>('latest');
 
   // ── Latest tab state ────────────────────────────────────────────────────────
-  const [latestJobs, setLatestJobs] = useState<JobUI[]>(() =>
-    initialJobs ? initialJobs.map(j => transformJobToUIStatic(j)) : []
-  );
-  const [latestJobsLoading, setLatestJobsLoading] = useState(!initialJobs);
+  const [latestJobs, setLatestJobs] = useState<JobUI[]>([]);
+  const [latestJobsLoading, setLatestJobsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
 
   // ── Matches tab state ───────────────────────────────────────────────────────
@@ -501,7 +481,7 @@ export default function JobList({ initialJobs, initialCountry, initialRoleCatego
         const sessionTimestamp = sessionStorage.getItem(STORAGE_KEYS.LATEST_JOBS_CACHE_TS);
         const sessionVersion = sessionStorage.getItem(STORAGE_KEYS.LATEST_JOBS_CACHE_VERSION);
 
-        if (sessionCached && sessionTimestamp) {
+        if (sessionCached && sessionTimestamp && sessionVersion === siteType) {
           const age = Date.now() - parseInt(sessionTimestamp, 10);
           if (age < CLIENT_CACHE_DURATION) {
             try {
@@ -514,23 +494,21 @@ export default function JobList({ initialJobs, initialCountry, initialRoleCatego
         }
       }
 
-      const JOBS_API_URL = process.env.NEXT_PUBLIC_JOBS_API_URL || 'https://jobs-api.joevicspro.workers.dev';
+      const JOBS_API_URL = 'https://jobs-api.joevicspro.workers.dev/jobs-global';
       const res = await fetch(JOBS_API_URL);
       if (!res.ok) throw new Error(`Jobs API error: ${res.status}`);
       const { jobs: allData, cacheVersion } = await res.json();
 
       const allData_raw = (allData || []);
-      // Global site: everything that isn't purely Nigerian or purely Gulf
-      // Remote jobs with no country also go here
-      const globalJobs = allData_raw.filter((job: any) => filterForGlobal(job));
-      const allUiJobs = globalJobs.map((job: any) => transformJobToUI(job, 0, null));
+      // Worker already filtered by ?site=global
+      const allUiJobs = allData_raw.map((job: any) => transformJobToUI(job, 0, null));
       setLatestJobs(allUiJobs);
       setCurrentPage(1);
 
       try {
         sessionStorage.setItem(STORAGE_KEYS.LATEST_JOBS_CACHE, JSON.stringify(allUiJobs));
         sessionStorage.setItem(STORAGE_KEYS.LATEST_JOBS_CACHE_TS, Date.now().toString());
-        if (cacheVersion) sessionStorage.setItem(STORAGE_KEYS.LATEST_JOBS_CACHE_VERSION, cacheVersion);
+        sessionStorage.setItem(STORAGE_KEYS.LATEST_JOBS_CACHE_VERSION, siteType);
       } catch (e) {
         console.warn('[JobList] sessionStorage write failed:', e);
       }
@@ -563,13 +541,12 @@ export default function JobList({ initialJobs, initialCountry, initialRoleCatego
         } catch { }
       }
 
-      const JOBS_API_URL = process.env.NEXT_PUBLIC_JOBS_API_URL || 'https://jobs-api.joevicspro.workers.dev';
+      const JOBS_API_URL = 'https://jobs-api.joevicspro.workers.dev/jobs-global';
       const res = await fetch(JOBS_API_URL);
       if (!res.ok) throw new Error(`Jobs API error: ${res.status}`);
       const { jobs: data } = await res.json();
-      // Global site: everything that isn't purely Nigerian or purely Gulf
-      const globalData = (data || []).filter((job: any) => filterForGlobal(job));
-      const processedJobs = await processJobsWithMatching(globalData);
+      // Worker already filtered by ?site=global
+      const processedJobs = await processJobsWithMatching(data || []);
       processedJobs.sort((a, b) => (b.calculatedTotal || 0) - (a.calculatedTotal || 0));
 
       try {
@@ -595,8 +572,7 @@ export default function JobList({ initialJobs, initialCountry, initialRoleCatego
     if (!authChecked) return;
     if (latestFetchedRef.current) return;
     latestFetchedRef.current = true;
-    if (initialJobs && initialJobs.length > 0) return;
-    fetchLatestJobs();
+    fetchLatestJobs(); // always fetch from https://jobs-api.joevicspro.workers.dev/jobs-global
   }, [authChecked]);
 
   // ── Fetch matches trigger ───────────────────────────────────────────────────
@@ -818,6 +794,7 @@ export default function JobList({ initialJobs, initialCountry, initialRoleCatego
           const loc = jobLoc as Record<string, unknown>;
           locationMatch = String(loc.city || '').toLowerCase().includes(query) || String(loc.state || '').toLowerCase().includes(query) || String(loc.country || '').toLowerCase().includes(query);
         }
+        // Also match against job.country array
         if (!titleMatch && !companyMatch && !descriptionMatch && !locationMatch) return false;
       }
 
@@ -931,7 +908,7 @@ export default function JobList({ initialJobs, initialCountry, initialRoleCatego
   return (
     <>
       <OrganizationSchema />
-      <WebSiteSchema searchAction={{ target: 'https://www.jobmeter.app/?q={search_term_string}', queryInput: 'required name=search_term_string' }} />
+      <WebSiteSchema searchAction={{ target: 'https://jobmeter.app/?q={search_term_string}', queryInput: 'required name=search_term_string' }} />
 
       <div className="min-h-screen" style={{ backgroundColor: theme.colors.background.muted }}>
 
@@ -1125,12 +1102,7 @@ export default function JobList({ initialJobs, initialCountry, initialRoleCatego
                   defaultValue=""
                   onChange={(e) => {
                     const v = e.target.value;
-                    const countryRoutes: Record<string, string> = {
-                      // Nigeria — same site, no redirect needed (handled below)
-                      // Gulf site — handled separately below
-                    };
-                    // Primary global countries — internal navigation
-                    const internalSearchMap: Record<string, string> = {
+                    const internalCountries: Record<string, string> = {
                       'Global': '',
                       'United States': 'United States',
                       'United Kingdom': 'United Kingdom',
@@ -1141,24 +1113,24 @@ export default function JobList({ initialJobs, initialCountry, initialRoleCatego
                       'Netherlands': 'Netherlands',
                       'Ireland': 'Ireland',
                     };
-                    if (v in internalSearchMap) {
-                      const search = internalSearchMap[v];
-                      router.push(search ? `/jobs?search=${encodeURIComponent(search)}` : '/jobs');
+                    if (v in internalCountries) {
+                      // Filter job list by country (empty string = show all)
+                      setFilters(prev => ({ ...prev, country: internalCountries[v] }));
                       return;
                     }
                     // Nigeria — external new tab
                     if (v === 'Nigeria') { window.open('https://jobmeter.app/jobs', '_blank', 'noopener,noreferrer'); return; }
                     // Gulf — external new tab
                     const gulfRoutes: Record<string, string> = {
-                      'UAE': 'https://www.gulf.jobmeter.app/jobs?search=UAE',
-                      'Saudi Arabia': 'https://www.gulf.jobmeter.app/jobs?search=Saudi+Arabia',
-                      'Kuwait': 'https://www.gulf.jobmeter.app/jobs?search=Kuwait',
-                      'Qatar': 'https://www.gulf.jobmeter.app/jobs?search=Qatar',
-                      'Bahrain': 'https://www.gulf.jobmeter.app/jobs?search=Bahrain',
-                      'Oman': 'https://www.gulf.jobmeter.app/jobs?search=Oman',
-                      'Jordan': 'https://www.gulf.jobmeter.app/jobs?search=Jordan',
-                      'Egypt': 'https://www.gulf.jobmeter.app/jobs?search=Egypt',
-                      'Lebanon': 'https://www.gulf.jobmeter.app/jobs?search=Lebanon',
+                      'UAE': 'https://gulf.jobmeter.app/jobs?search=UAE',
+                      'Saudi Arabia': 'https://gulf.jobmeter.app/jobs?search=Saudi+Arabia',
+                      'Kuwait': 'https://gulf.jobmeter.app/jobs?search=Kuwait',
+                      'Qatar': 'https://gulf.jobmeter.app/jobs?search=Qatar',
+                      'Bahrain': 'https://gulf.jobmeter.app/jobs?search=Bahrain',
+                      'Oman': 'https://gulf.jobmeter.app/jobs?search=Oman',
+                      'Jordan': 'https://gulf.jobmeter.app/jobs?search=Jordan',
+                      'Egypt': 'https://gulf.jobmeter.app/jobs?search=Egypt',
+                      'Lebanon': 'https://gulf.jobmeter.app/jobs?search=Lebanon',
                     };
                     const url = gulfRoutes[v];
                     if (url) window.open(url, '_blank', 'noopener,noreferrer');

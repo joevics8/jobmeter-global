@@ -1,6 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.jobmeter.app';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.global.jobmeter.app';
+const JOBS_TABLE = 'jobs_global';
 const JOBS_PER_SITEMAP = 1000;
 
 /**
@@ -35,7 +36,7 @@ export async function GET(
     // expired_indexed = real company expired jobs (keep indexed, show similar jobs)
     // expired = Confidential Employer expired jobs (noindex, excluded from sitemap)
     const { data: jobs, error } = await supabase
-      .from('jobs')
+      .from(JOBS_TABLE)
       .select('slug, updated_at')
       .in('status', ['active', 'expired_indexed'])
       .range(from, to)

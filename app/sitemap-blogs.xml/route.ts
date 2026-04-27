@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import { MetadataRoute } from 'next';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.jobmeter.app';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.gulf.jobmeter.app';
 
 /**
  * Blog sitemap
@@ -25,7 +25,8 @@ export async function GET() {
     const { data: blogs, error: blogError } = await supabase
       .from('blogs')
       .select('slug, updated_at')
-      .eq('is_published', true);
+      .eq('is_published', true)
+      .eq('country', 'remote');
 
     if (blogError) {
       console.error('Error fetching blogs:', JSON.stringify(blogError));
