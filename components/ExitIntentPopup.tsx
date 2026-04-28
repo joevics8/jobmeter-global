@@ -104,7 +104,7 @@ export default function ExitIntentPopup() {
 
               <div className="space-y-3">
               <a 
-                href="https://whatsapp.com/channel/0029VbC3NrUKLaHp8JAt7v3y"
+                href="https://whatsapp.com/channel/0029VbCmGF10Qeanq3dje41Z"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={handleSocialClick}
@@ -120,7 +120,7 @@ export default function ExitIntentPopup() {
               </a>
 
               <a 
-                href="https://t.me/+1YYoQJdLzzkwNDI0"
+                href="https://t.me/+nK6OHg9ksAthOTc0"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={handleSocialClick}

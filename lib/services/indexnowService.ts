@@ -3,7 +3,7 @@ export async function submitToIndexNow(slug: string) {
   
   if (!apiKey) return false;
   
-  const jobUrl = `https://www.jobmeter.app/jobs/${slug}`;
+  const jobUrl = `https://www.remote.jobmeter.app/jobs/${slug}`;
   
   try {
     const response = await fetch('https://api.indexnow.org/indexnow', {

@@ -4,7 +4,7 @@ import { Metadata } from 'next';
 export const dynamic = 'force-dynamic'; // ✅ Vercel renders per request, but we rely on Worker cache
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || 'https://www.global.jobmeter.app';
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://www.remote.jobmeter.app';
 
 const CLOUDFLARE_WORKER_URL =
   'https://jobs-api.joevicspro.workers.dev';

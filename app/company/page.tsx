@@ -20,7 +20,7 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
       title: 'Top Companies Hiring in Nigeria | JobMeter',
       description: 'Explore top companies hiring in Nigeria. Discover company culture, benefits, and career opportunities.',
       type: 'website',
-      url: 'https://global.jobmeter.app/company',
+      url: 'https://remote.jobmeter.app/company',
     },
     twitter: {
       card: 'summary_large_image',
@@ -28,7 +28,7 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
       description: 'Explore top companies hiring in Nigeria. Discover company culture, benefits, and career opportunities.',
     },
     alternates: {
-      canonical: 'https://global.jobmeter.app/company',
+      canonical: 'https://remote.jobmeter.app/company',
     },
   };
 }
@@ -113,7 +113,7 @@ export default async function CompanyDirectoryPage({ searchParams }: Props) {
       item: {
         '@type': 'Organization',
         name: company.name,
-        url: `https://global.jobmeter.app/company/${company.slug}`,
+        url: `https://remote.jobmeter.app/company/${company.slug}`,
       },
     })),
   };

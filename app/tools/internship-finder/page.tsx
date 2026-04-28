@@ -285,15 +285,15 @@ export default function InternshipFinderPage() {
                 "@type": "WebPage",
                 "name": "Internship Finder — Find Internships, Web Development Internships & Remote Intern Jobs 2026",
                 "description": "Use Internship Finder to discover paid internships, web developer internships, remote internship opportunities, and summer internships 2026. The best internship search site for students and fresh graduates in Nigeria and worldwide.",
-                "url": "https://global.jobmeter.app/tools/internship-finder",
+                "url": "https://remote.jobmeter.app/tools/internship-finder",
                 "inLanguage": "en",
                 "dateModified": new Date().toISOString().split('T')[0],
                 "breadcrumb": {
                   "@type": "BreadcrumbList",
                   "itemListElement": [
-                    { "@type": "ListItem", "position": 1, "name": "Home",  "item": "https://global.jobmeter.app" },
-                    { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://global.jobmeter.app/tools" },
-                    { "@type": "ListItem", "position": 3, "name": "Internship Finder", "item": "https://global.jobmeter.app/tools/internship-finder" },
+                    { "@type": "ListItem", "position": 1, "name": "Home",  "item": "https://remote.jobmeter.app" },
+                    { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://remote.jobmeter.app/tools" },
+                    { "@type": "ListItem", "position": 3, "name": "Internship Finder", "item": "https://remote.jobmeter.app/tools/internship-finder" },
                   ]
                 }
               },
@@ -304,7 +304,7 @@ export default function InternshipFinderPage() {
                 "applicationCategory": "BusinessApplication",
                 "operatingSystem": "Web",
                 "description": "AI-powered internship finder and internship search site for discovering paid internships, web developer internships, remote internships, and international internship opportunities in Nigeria and worldwide.",
-                "url": "https://global.jobmeter.app/tools/internship-finder",
+                "url": "https://remote.jobmeter.app/tools/internship-finder",
                 "offers": {
                   "@type": "Offer",
                   "price": "0",
@@ -339,11 +339,11 @@ export default function InternshipFinderPage() {
                 "name": "Related Job Finder Tools",
                 "description": "Other free job finder tools available on the platform",
                 "itemListElement": [
-                  { "@type": "ListItem", "position": 1, "name": "Remote Jobs Finder",            "url": "https://global.jobmeter.app/tools/remote-jobs-finder" },
-                  { "@type": "ListItem", "position": 2, "name": "NYSC Jobs Finder",              "url": "https://global.jobmeter.app/tools/nysc-finder" },
-                  { "@type": "ListItem", "position": 3, "name": "Jobs with Accommodation",       "url": "https://global.jobmeter.app/tools/accommodation-finder" },
-                  { "@type": "ListItem", "position": 4, "name": "Jobs with Visa Sponsorship",    "url": "https://global.jobmeter.app/tools/visa-finder" },
-                  { "@type": "ListItem", "position": 5, "name": "Entry Level Jobs Finder",       "url": "https://global.jobmeter.app/tools/entry-level-finder" },
+                  { "@type": "ListItem", "position": 1, "name": "Remote Jobs Finder",            "url": "https://remote.jobmeter.app/tools/remote-jobs-finder" },
+                  { "@type": "ListItem", "position": 2, "name": "NYSC Jobs Finder",              "url": "https://remote.jobmeter.app/tools/nysc-finder" },
+                  { "@type": "ListItem", "position": 3, "name": "Jobs with Accommodation",       "url": "https://remote.jobmeter.app/tools/accommodation-finder" },
+                  { "@type": "ListItem", "position": 4, "name": "Jobs with Visa Sponsorship",    "url": "https://remote.jobmeter.app/tools/visa-finder" },
+                  { "@type": "ListItem", "position": 5, "name": "Entry Level Jobs Finder",       "url": "https://remote.jobmeter.app/tools/entry-level-finder" },
                 ]
               }
             ])

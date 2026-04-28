@@ -40,7 +40,7 @@ export default function WhatsAppFloatButton() {
         {/* WhatsApp - Now on top */}
         <div className="flex justify-end">
           <a 
-            href="https://whatsapp.com/channel/0029VbC3NrUKLaHp8JAt7v3y"
+            href="https://whatsapp.com/channel/0029VbCmGF10Qeanq3dje41Z"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center w-12 h-12 bg-green-500 rounded-full shadow-lg hover:bg-green-600 transition-all hover:scale-110 group relative"
@@ -57,7 +57,7 @@ export default function WhatsAppFloatButton() {
         {/* Telegram */}
         <div className="flex justify-end">
           <a 
-            href="https://t.me/+1YYoQJdLzzkwNDI0"
+            href="https://t.me/+nK6OHg9ksAthOTc0"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center w-12 h-12 bg-[#0088cc] rounded-full shadow-lg hover:bg-[#0077b3] transition-all hover:scale-110 group relative"

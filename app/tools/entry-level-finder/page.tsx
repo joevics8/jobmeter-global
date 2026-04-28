@@ -291,15 +291,15 @@ export default function EntryLevelFinderPage() {
                 "@type": "WebPage",
                 "name": "Entry Level Jobs Finder — Find Junior Jobs, No-Experience Roles & Remote Entry Level Positions Worldwide 2026",
                 "description": "Find entry level jobs with no experience required worldwide. Discover junior web developer jobs, entry level data analyst jobs, entry level cybersecurity jobs, remote entry level jobs, and beginner-friendly positions across all industries on Jobmeter.",
-                "url": "https://global.jobmeter.app/tools/entry-level-finder",
+                "url": "https://remote.jobmeter.app/tools/entry-level-finder",
                 "inLanguage": "en",
                 "dateModified": new Date().toISOString().split('T')[0],
                 "breadcrumb": {
                   "@type": "BreadcrumbList",
                   "itemListElement": [
-                    { "@type": "ListItem", "position": 1, "name": "Home",  "item": "https://global.jobmeter.app" },
-                    { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://global.jobmeter.app/tools" },
-                    { "@type": "ListItem", "position": 3, "name": "Entry Level Jobs Finder", "item": "https://global.jobmeter.app/tools/entry-level-finder" },
+                    { "@type": "ListItem", "position": 1, "name": "Home",  "item": "https://remote.jobmeter.app" },
+                    { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://remote.jobmeter.app/tools" },
+                    { "@type": "ListItem", "position": 3, "name": "Entry Level Jobs Finder", "item": "https://remote.jobmeter.app/tools/entry-level-finder" },
                   ]
                 }
               },
@@ -310,7 +310,7 @@ export default function EntryLevelFinderPage() {
                 "applicationCategory": "BusinessApplication",
                 "operatingSystem": "Web",
                 "description": "AI-powered global job finder for entry level jobs with no experience required. Covers junior web developer jobs, entry level data analyst positions, entry level cybersecurity jobs, remote entry level roles, and beginner-friendly openings across all sectors worldwide.",
-                "url": "https://global.jobmeter.app/tools/entry-level-finder",
+                "url": "https://remote.jobmeter.app/tools/entry-level-finder",
                 "offers": {
                   "@type": "Offer",
                   "price": "0",
@@ -346,13 +346,13 @@ export default function EntryLevelFinderPage() {
                 "@context": "https://schema.org",
                 "@type": "ItemList",
                 "name": "Related Job Finder Tools on Jobmeter",
-                "description": "Other free job finder tools available on global.jobmeter.app",
+                "description": "Other free job finder tools available on remote.jobmeter.app",
                 "itemListElement": [
-                  { "@type": "ListItem", "position": 1, "name": "Remote Jobs Finder",           "url": "https://global.jobmeter.app/tools/remote-jobs-finder" },
-                  { "@type": "ListItem", "position": 2, "name": "Internship Finder",             "url": "https://global.jobmeter.app/tools/internship-finder" },
-                  { "@type": "ListItem", "position": 3, "name": "Graduate & Trainee Jobs",       "url": "https://global.jobmeter.app/tools/graduate-trainee-finder" },
-                  { "@type": "ListItem", "position": 4, "name": "Jobs with Visa Sponsorship",    "url": "https://global.jobmeter.app/tools/visa-finder" },
-                  { "@type": "ListItem", "position": 5, "name": "Jobs with Accommodation",       "url": "https://global.jobmeter.app/tools/accommodation-finder" },
+                  { "@type": "ListItem", "position": 1, "name": "Remote Jobs Finder",           "url": "https://remote.jobmeter.app/tools/remote-jobs-finder" },
+                  { "@type": "ListItem", "position": 2, "name": "Internship Finder",             "url": "https://remote.jobmeter.app/tools/internship-finder" },
+                  { "@type": "ListItem", "position": 3, "name": "Graduate & Trainee Jobs",       "url": "https://remote.jobmeter.app/tools/graduate-trainee-finder" },
+                  { "@type": "ListItem", "position": 4, "name": "Jobs with Visa Sponsorship",    "url": "https://remote.jobmeter.app/tools/visa-finder" },
+                  { "@type": "ListItem", "position": 5, "name": "Jobs with Accommodation",       "url": "https://remote.jobmeter.app/tools/accommodation-finder" },
                 ]
               }
             ])

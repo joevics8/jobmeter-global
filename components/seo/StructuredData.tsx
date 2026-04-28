@@ -1,7 +1,7 @@
 // Server Component Schemas (for use in Server Components)
 // Use these in app directory pages that are Server Components
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.global.jobmeter.app';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.remote.jobmeter.app';
 
 // =============================================
 // SITE-WIDE SCHEMAS (Homepage, etc.)

@@ -1,5 +1,5 @@
 // lib/mapJobToSchema.ts
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.jobmeter.app";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.remote.jobmeter.app";
 
 export function mapJobToSchema(job: any) {
   const getCleanDescription = () => {

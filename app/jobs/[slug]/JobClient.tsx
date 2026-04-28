@@ -875,7 +875,7 @@ export default function JobClient({ job, relatedJobs, companies }: {
                 </div>
               )}
 
-              {/* No "Apply for Me" on global.jobmeter.app */}
+              {/* No "Apply for Me" on remote.jobmeter.app */}
 
               <div className="bg-white rounded-xl shadow-sm p-6">
                 <h2 className="text-xl font-semibold mb-4 text-gray-900">Join Our Communities</h2>
@@ -1159,7 +1159,7 @@ export default function JobClient({ job, relatedJobs, companies }: {
           />
         )}
 
-        {/* No TimedJobPopup on global.jobmeter.app */}
+        {/* No TimedJobPopup on remote.jobmeter.app */}
 
       </div>
     </>

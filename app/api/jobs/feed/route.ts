@@ -78,7 +78,7 @@ export async function GET(request: NextRequest) {
 
     console.log('Jobs fetched:', jobs?.length || 0);
     
-    const baseUrl = 'https://www.jobmeter.app';
+    const baseUrl = 'https://www.remote.jobmeter.app';
 
     // Generate RSS XML
     const rssItems = jobs?.map(job => {
@@ -174,10 +174,10 @@ export async function GET(request: NextRequest) {
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>JobMeter Jobs Feed</title>
-    <link>https://www.jobmeter.app</link>
+    <link>https://www.gulf.jobmeter.app</link>
     <description>Latest job listings from JobMeter - Find your dream job in Nigeria and beyond</description>
     <language>en-us</language>
-    <atom:link href="https://www.jobmeter.app/api/jobs/feed" rel="self" type="application/rss+xml" />
+    <atom:link href="https://www.gulf.jobmeter.app/api/jobs/feed" rel="self" type="application/rss+xml" />
     <lastBuildDate>${formatRSSDate()}</lastBuildDate>
     <generator>JobMeter RSS Feed Generator</generator>
     <docs>https://www.rssboard.org/rss-specification</docs>

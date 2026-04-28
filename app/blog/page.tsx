@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     title: 'Career Blog & Articles | JobMeter',
     description: 'Expert career advice, salary guides, and job search tips for Nigerian professionals.',
     type: 'website',
-    url: 'https://global.jobmeter.app/blog',
+    url: 'https://remote.jobmeter.app/blog',
   },
   twitter: {
     card: 'summary_large_image',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     description: 'Expert career advice, salary guides, and job search tips for Nigerian professionals.',
   },
   alternates: {
-    canonical: 'https://global.jobmeter.app/blog',
+    canonical: 'https://remote.jobmeter.app/blog',
   },
 };
 

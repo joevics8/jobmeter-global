@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-const siteUrl = 'https://www.global.jobmeter.app';
+const siteUrl = 'https://www.remote.jobmeter.app';
 
 export const metadata: Metadata = {
   title: 'Welcome to JobMeter — Extension Installed',

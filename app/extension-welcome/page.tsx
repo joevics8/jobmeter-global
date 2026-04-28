@@ -444,11 +444,11 @@ export default function ExtensionWelcomePage() {
       `}</style>
 
       <nav>
-        <a href="https://global.jobmeter.app" className="logo">
+        <a href="https://remote.jobmeter.app" className="logo">
           <span className="logo-dot"></span>
           JobMeter
         </a>
-        <a href="https://global.jobmeter.app/signup" className="nav-cta">Create free account</a>
+        <a href="https://remote.jobmeter.app/signup" className="nav-cta">Create free account</a>
       </nav>
 
       <section className="hero">
@@ -461,7 +461,7 @@ export default function ExtensionWelcomePage() {
             JobMeter now sits quietly in your browser, automatically highlighting salary, skills, experience, and work mode on every job page you visit — so you can see what matters in seconds, not minutes.
           </p>
           <div className="hero-actions">
-            <a href="https://global.jobmeter.app/signup" className="btn-primary">Create your free account</a>
+            <a href="https://remote.jobmeter.app/signup" className="btn-primary">Create your free account</a>
             <a href="#how-it-works" className="btn-secondary">See how it works</a>
           </div>
         </div>
@@ -606,22 +606,22 @@ export default function ExtensionWelcomePage() {
         <section className="section">
           <div className="reveal">
             <div className="section-title">The extension is free.<br />Create your account to unlock everything.</div>
-            <p className="cta-sub">Save your profile across devices, track applications, and get deeper salary insights on global.jobmeter.app.</p>
-            <a href="https://global.jobmeter.app/signup" className="btn-primary">Create free account →</a>
+            <p className="cta-sub">Save your profile across devices, track applications, and get deeper salary insights on remote.jobmeter.app.</p>
+            <a href="https://remote.jobmeter.app/signup" className="btn-primary">Create free account →</a>
             <p className="cta-note">No credit card. No nonsense.</p>
           </div>
         </section>
       </div>
 
       <footer>
-        <a href="https://global.jobmeter.app" className="logo">
+        <a href="https://remote.jobmeter.app" className="logo">
           <span className="logo-dot"></span>
           JobMeter
         </a>
         <div className="footer-links">
-          <a href="https://global.jobmeter.app">Home</a>
-          <a href="https://global.jobmeter.app/privacy">Privacy</a>
-          <a href="https://global.jobmeter.app/terms">Terms</a>
+          <a href="https://remote.jobmeter.app">Home</a>
+          <a href="https://remote.jobmeter.app/privacy">Privacy</a>
+          <a href="https://remote.jobmeter.app/terms">Terms</a>
           <a href="help.jobmeter@gmail.com">Support</a>
         </div>
       </footer>

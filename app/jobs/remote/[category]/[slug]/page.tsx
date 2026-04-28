@@ -71,7 +71,7 @@ export async function generateMetadata({ params }: { params: { category: string;
     title: `${job.title} at ${companyName} - Remote ${categoryName} Jobs`,
     description: job.description?.substring(0, 160),
     alternates: {
-      canonical: `https://www.global.jobmeter.app/jobs/remote/${category}/${slug}`,
+      canonical: `https://www.remote.jobmeter.app/jobs/remote/${category}/${slug}`,
     },
   };
 }

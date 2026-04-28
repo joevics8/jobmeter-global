@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.global.jobmeter.app';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.remote.jobmeter.app';
 const JOBS_TABLE = 'jobs_global';
 const JOBS_PER_SITEMAP = 1000;
 

@@ -5,7 +5,7 @@ import AdUnit from '@/components/ads/AdUnit';
 
 export const revalidate = false;
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.global.jobmeter.app';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.remote.jobmeter.app';
 
 export const metadata: Metadata = {
   title: 'Remote Jobs - Work From Anywhere | JobMeter',
