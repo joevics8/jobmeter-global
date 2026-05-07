@@ -5,29 +5,28 @@ import Image from 'next/image';
 import { BlogSchema } from '@/components/seo/StructuredData';
 import AdUnit from '@/components/ads/AdUnit';
 
-export const revalidate = false;
-export const dynamic = 'force-static';
+export const revalidate = 86400; // Rebuild once per day
 
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.remote.jobmeter.app';
+const WORKER_URL = 'https://jobs-api.joevicspro.workers.dev';
 
 export const metadata: Metadata = {
   title: 'Career Blog & Articles | Job Search Tips & Salary Guides | JobMeter',
-  description: 'Read expert career advice, salary guides, interview tips, and job search strategies. Stay updated with the latest insights for Nigerian job seekers.',
-  keywords: ['career blog', 'job search tips', 'salary guides', 'interview tips', 'career advice nigeria', 'professional development'],
+  description: 'Read expert career advice, salary guides, interview tips, and job search strategies. Stay updated with the latest insights for remote and global job seekers.',
+  keywords: ['career blog', 'job search tips', 'salary guides', 'interview tips', 'remote jobs', 'global career advice', 'professional development'],
   openGraph: {
     title: 'Career Blog & Articles | JobMeter',
-    description: 'Expert career advice, salary guides, and job search tips for Nigerian professionals.',
+    description: 'Expert career advice, salary guides, and job search tips for remote and global professionals.',
     type: 'website',
-    url: 'https://remote.jobmeter.app/blog',
+    url: `${siteUrl}/blog`,
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Career Blog & Articles | JobMeter',
-    description: 'Expert career advice, salary guides, and job search tips for Nigerian professionals.',
+    description: 'Expert career advice, salary guides, and job search tips for remote and global professionals.',
   },
   alternates: {
-    canonical: 'https://remote.jobmeter.app/blog',
+    canonical: `${siteUrl}/blog`,
   },
 };
 
@@ -46,28 +45,14 @@ interface BlogPost {
 
 async function getBlogPosts(): Promise<BlogPost[]> {
   try {
-    const params = new URLSearchParams({
-      select: 'id,title,slug,excerpt,featured_image_url,category,tags,published_at,view_count,read_time_minutes',
-      is_published: 'eq.true',
-      country: 'eq.remote',
-      order: 'published_at.desc',
+    const res = await fetch(`${WORKER_URL}/blogs-global`, {
+      next: { revalidate: 86400 },
     });
-
-    const res = await fetch(
-      `${SUPABASE_URL}/rest/v1/blogs?${params.toString()}`,
-      {
-        headers: {
-          apikey: SUPABASE_ANON_KEY,
-          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-        },
-        next: { revalidate: false },
-      }
-    );
-
     if (!res.ok) return [];
-    return await res.json();
+    const data = await res.json();
+    return data.blogs || [];
   } catch (error) {
-    console.error('Error fetching blog posts:', error);
+    console.error('Error fetching global blog posts:', error);
     return [];
   }
 }

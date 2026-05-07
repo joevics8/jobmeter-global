@@ -1,4 +1,6 @@
-// 📁 next.config.js
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -34,7 +36,8 @@ const nextConfig = {
         // Cache job detail pages at CF edge for 24 hours.
         // Vary: '' strips Next.js RSC vary headers so CF can cache the response.
         // Without this, CF sees vary and marks the response as DYNAMIC (uncacheable).
-        source: '/jobs/:slug',
+        // Pattern excludes /jobs/Location and /jobs/state to avoid unintended matches.
+        source: '/jobs/:slug((?!Location|state)[^/]+)',
         headers: [
           {
             key: 'Cache-Control',
@@ -99,34 +102,8 @@ const nextConfig = {
       };
     }
 
-    if (!isServer) {
-      config.optimization = {
-        ...config.optimization,
-        splitChunks: {
-          chunks: 'all',
-          cacheGroups: {
-            default: false,
-            vendors: false,
-            vendor: {
-              name: 'vendor',
-              chunks: 'all',
-              test: /node_modules/,
-              priority: 20,
-            },
-            common: {
-              name: 'common',
-              minChunks: 2,
-              chunks: 'all',
-              priority: 10,
-              reuseExistingChunk: true,
-              enforce: true,
-            },
-          },
-        },
-      };
-    }
     return config;
   },
 };
 
-module.exports = nextConfig;
+module.exports = withBundleAnalyzer(nextConfig);
