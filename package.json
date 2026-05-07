@@ -90,6 +90,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^16.2.5",
     "@types/html2pdf.js": "^0.10.0",
     "critters": "^0.0.23"
   }
