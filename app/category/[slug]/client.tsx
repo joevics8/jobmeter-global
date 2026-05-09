@@ -78,7 +78,7 @@ function matchesPage(job: RawJob, page: CategoryJobPage): boolean {
     job.role_category?.toLowerCase().includes(page.filter_role.toLowerCase()) ||
     job.title?.toLowerCase().includes(page.filter_role.toLowerCase());
 
-  return cityMatch && roleMatch;
+  return !!cityMatch && !!roleMatch;
 }
 
 // ... (Section and Prose remain the same)
