@@ -95,7 +95,7 @@ function getRandomItems<T>(arr: T[], n: number): T[] {
   return [...arr].sort(() => Math.random() - 0.5).slice(0, n);
 }
 
-/** Returns true if the job belongs to a Gulf country */
+/** Returns true if the job belongs to a Global country */
 function isGlobalJob(job: any): boolean {
   const countryArr: string[] = Array.isArray(job.country) ? job.country : [];
   const locationCountry = typeof job.location === 'object'
@@ -104,6 +104,33 @@ function isGlobalJob(job: any): boolean {
 
   const candidates = [...countryArr, locationCountry].map(c => c.toLowerCase().trim());
   return candidates.some(c => GLOBAL_COUNTRIES_SET.has(c));
+}
+
+/**
+ * Derives a URL-safe country slug from a job record.
+ * Falls back to 'global' if no country can be determined.
+ */
+function getJobCountrySlug(job: any): string {
+  const countryArr: string[] = Array.isArray(job.country) ? job.country : [];
+  const first = countryArr.find((c) => c.toLowerCase() !== 'global');
+  if (first) {
+    return first.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+  }
+  if (job.location && typeof job.location === 'object') {
+    const c = job.location.country || job.location.countries?.[0];
+    if (c && c.toLowerCase() !== 'global') {
+      return c.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+    }
+  }
+  return 'global';
+}
+
+/**
+ * Builds a job detail URL with the [country]/[slug] structure.
+ */
+function buildJobUrl(job: any): string {
+  const countrySlug = getJobCountrySlug(job);
+  return `/jobs/${countrySlug}/${job.slug || job.id}`;
 }
 
 /**
@@ -161,7 +188,9 @@ export default function JobClient({ job, relatedJobs, companies }: {
   };
 
   const handleShare = async () => {
-    const shareUrl = `${typeof window !== 'undefined' ? window.location.origin : ''}/jobs/${job.slug || job.id}`;
+    // Build canonical share URL using [country]/[slug] structure
+    const origin = typeof window !== 'undefined' ? window.location.origin : '';
+    const shareUrl = `${origin}${buildJobUrl(job)}`;
     if (navigator.share) {
       try {
         await navigator.share({
@@ -542,7 +571,11 @@ export default function JobClient({ job, relatedJobs, companies }: {
                     <p className="text-lg font-bold text-gray-900 mb-3">Find similar jobs instead:</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {similarJobs.slice(0, 10).map((similarJob) => (
-                        <a key={similarJob.id} href={`/jobs/${similarJob.slug || similarJob.id}`} className="block p-3 bg-white hover:bg-blue-50 rounded-lg transition-colors">
+                        <a
+                          key={similarJob.id}
+                          href={buildJobUrl(similarJob)}
+                          className="block p-3 bg-white hover:bg-blue-50 rounded-lg transition-colors"
+                        >
                           <p className="text-base font-medium text-blue-600 line-clamp-1">{similarJob.title}</p>
                           <p className="text-xs text-gray-900 mt-0.5">
                             {typeof similarJob.company === 'string' ? similarJob.company : similarJob.company?.name || 'Company'}
@@ -1020,7 +1053,11 @@ export default function JobClient({ job, relatedJobs, companies }: {
                   <div className="px-5 py-4">
                     <div className="space-y-4">
                       {similarJobs.map((similarJob) => (
-                        <a key={similarJob.id} href={`/jobs/${similarJob.slug || similarJob.id}`} className="block group">
+                        <a
+                          key={similarJob.id}
+                          href={buildJobUrl(similarJob)}
+                          className="block group"
+                        >
                           <div className="flex items-start gap-3 pb-4 border-b border-gray-100 last:border-0 last:pb-0 hover:bg-gray-50 -mx-2 px-2 py-2 rounded-lg transition-colors">
                             <div className="flex-shrink-0 w-1.5 h-1.5 rounded-full mt-2 group-hover:scale-150 transition-transform" style={{ backgroundColor: theme.colors.primary.DEFAULT }}></div>
                             <div className="flex-1 min-w-0">

@@ -1,6 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
+import { getCountrySlug } from '@/lib/countrySlugMap';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.remote.jobmeter.app';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.global.jobmeter.app';
 const JOBS_TABLE = 'jobs_global';
 const JOBS_PER_SITEMAP = 1000;
 
@@ -37,7 +38,7 @@ export async function GET(
     // expired = Confidential Employer expired jobs (noindex, excluded from sitemap)
     const { data: jobs, error } = await supabase
       .from(JOBS_TABLE)
-      .select('slug, updated_at')
+      .select('slug, updated_at, country, location')
       .in('status', ['active', 'expired_indexed'])
       .range(from, to)
       .order('created_at', { ascending: false });
@@ -58,7 +59,7 @@ export async function GET(
 ${jobs
   .map(
     (job) => `  <url>
-    <loc>${siteUrl}/jobs/${job.slug}</loc>
+    <loc>${siteUrl}/jobs/${resolveCountrySlug(job)}/${job.slug}</loc>
     <lastmod>${job.updated_at ? new Date(job.updated_at).toISOString() : new Date().toISOString()}</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
@@ -77,6 +78,17 @@ ${jobs
     console.error('Error generating job sitemap:', error);
     return new Response('Error generating sitemap', { status: 500 });
   }
+}
+
+function resolveCountrySlug(job: { country?: string[] | null; location?: any }): string {
+  const countryArr: string[] = Array.isArray(job.country) ? job.country : [];
+  const first = countryArr.find((c) => c.toLowerCase() !== 'global');
+  if (first) return getCountrySlug(first);
+  if (job.location && typeof job.location === 'object') {
+    const c = job.location.country || job.location.countries?.[0];
+    if (c && c.toLowerCase() !== 'global') return getCountrySlug(c);
+  }
+  return 'global';
 }
 
 export const revalidate = 3600;

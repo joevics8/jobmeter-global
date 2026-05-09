@@ -78,7 +78,7 @@ export async function GET(request: NextRequest) {
 
     console.log('Jobs fetched:', jobs?.length || 0);
     
-    const baseUrl = 'https://www.remote.jobmeter.app';
+    const baseUrl = 'https://www.global.jobmeter.app';
 
     // Generate RSS XML
     const rssItems = jobs?.map(job => {

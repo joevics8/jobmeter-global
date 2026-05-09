@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import { MetadataRoute } from 'next';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.remote.jobmeter.app';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.global.jobmeter.app';
 const JOBS_TABLE = 'jobs_gulf';
 const JOBS_PER_SITEMAP = 1000;
 

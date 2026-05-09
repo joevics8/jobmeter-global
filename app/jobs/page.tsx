@@ -2,7 +2,7 @@ import JobList from '@/components/jobs/JobList';
 import { Metadata } from 'next';
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || 'https://www.remote.jobmeter.app';
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://www.global.jobmeter.app';
 
 export const metadata: Metadata = {
   title: 'Find Jobs Near You — Search & Apply for Open Positions | JobMeter',

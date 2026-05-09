@@ -1122,15 +1122,15 @@ export default function JobList({ siteType = 'global', initialJobs, initialCount
                     if (v === 'Nigeria') { window.open('https://jobmeter.app/jobs', '_blank', 'noopener,noreferrer'); return; }
                     // Gulf — external new tab
                     const gulfRoutes: Record<string, string> = {
-                      'UAE': 'https://remote.jobmeter.app/jobs?search=UAE',
-                      'Saudi Arabia': 'https://remote.jobmeter.app/jobs?search=Saudi+Arabia',
-                      'Kuwait': 'https://remote.jobmeter.app/jobs?search=Kuwait',
-                      'Qatar': 'https://remote.jobmeter.app/jobs?search=Qatar',
-                      'Bahrain': 'https://remote.jobmeter.app/jobs?search=Bahrain',
-                      'Oman': 'https://remote.jobmeter.app/jobs?search=Oman',
-                      'Jordan': 'https://remote.jobmeter.app/jobs?search=Jordan',
-                      'Egypt': 'https://remote.jobmeter.app/jobs?search=Egypt',
-                      'Lebanon': 'https://remote.jobmeter.app/jobs?search=Lebanon',
+                      'UAE': 'https://gulf.jobmeter.app/jobs?search=UAE',
+                      'Saudi Arabia': 'https://gulf.jobmeter.app/jobs?search=Saudi+Arabia',
+                      'Kuwait': 'https://gulf.jobmeter.app/jobs?search=Kuwait',
+                      'Qatar': 'https://gulf.jobmeter.app/jobs?search=Qatar',
+                      'Bahrain': 'https://gulf.jobmeter.app/jobs?search=Bahrain',
+                      'Oman': 'https://gulf.jobmeter.app/jobs?search=Oman',
+                      'Jordan': 'https://gulf.jobmeter.app/jobs?search=Jordan',
+                      'Egypt': 'https://gulf.jobmeter.app/jobs?search=Egypt',
+                      'Lebanon': 'https://gulf.jobmeter.app/jobs?search=Lebanon',
                     };
                     const url = gulfRoutes[v];
                     if (url) window.open(url, '_blank', 'noopener,noreferrer');

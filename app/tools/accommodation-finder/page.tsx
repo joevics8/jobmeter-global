@@ -288,15 +288,15 @@ export default function AccommodationFinderPage() {
                 "@type": "WebPage",
                 "name": "Jobs with Accommodation Finder — Find Jobs That Provide Housing, Care Homes Jobs & Warehouse Jobs with Housing 2026",
                 "description": "Discover jobs with accommodation, jobs with housing included, care homes jobs near me, warehouse jobs near me, seasonal jobs with housing, and jobs abroad with accommodation. The best tool for finding jobs that provide housing in Nigeria and worldwide.",
-                "url": "https://remote.jobmeter.app/tools/accommodation-finder",
+                "url": "https://global.jobmeter.app/tools/accommodation-finder",
                 "inLanguage": "en",
                 "dateModified": new Date().toISOString().split('T')[0],
                 "breadcrumb": {
                   "@type": "BreadcrumbList",
                   "itemListElement": [
-                    { "@type": "ListItem", "position": 1, "name": "Home",  "item": "https://remote.jobmeter.app" },
-                    { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://remote.jobmeter.app/tools" },
-                    { "@type": "ListItem", "position": 3, "name": "Jobs with Accommodation Finder", "item": "https://remote.jobmeter.app/tools/accommodation-finder" },
+                    { "@type": "ListItem", "position": 1, "name": "Home",  "item": "https://global.jobmeter.app" },
+                    { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://global.jobmeter.app/tools" },
+                    { "@type": "ListItem", "position": 3, "name": "Jobs with Accommodation Finder", "item": "https://global.jobmeter.app/tools/accommodation-finder" },
                   ]
                 }
               },
@@ -307,7 +307,7 @@ export default function AccommodationFinderPage() {
                 "applicationCategory": "BusinessApplication",
                 "operatingSystem": "Web",
                 "description": "AI-powered job finder tool for discovering jobs with accommodation, jobs with housing included, care homes jobs, warehouse jobs, seasonal jobs with housing, jobs abroad with accommodation, and jobs that provide housing for employees in Nigeria and worldwide.",
-                "url": "https://remote.jobmeter.app/tools/accommodation-finder",
+                "url": "https://global.jobmeter.app/tools/accommodation-finder",
                 "offers": {
                   "@type": "Offer",
                   "price": "0",
@@ -343,11 +343,11 @@ export default function AccommodationFinderPage() {
                 "name": "Related Job Finder Tools",
                 "description": "Other free job finder tools on the platform",
                 "itemListElement": [
-                  { "@type": "ListItem", "position": 1, "name": "Remote Jobs Finder",         "url": "https://remote.jobmeter.app/tools/remote-jobs-finder" },
-                  { "@type": "ListItem", "position": 2, "name": "Internship Finder",           "url": "https://remote.jobmeter.app/tools/internship-finder" },
-                  { "@type": "ListItem", "position": 3, "name": "NYSC Jobs Finder",            "url": "https://remote.jobmeter.app/tools/nysc-finder" },
-                  { "@type": "ListItem", "position": 4, "name": "Jobs with Visa Sponsorship",  "url": "https://remote.jobmeter.app/tools/visa-finder" },
-                  { "@type": "ListItem", "position": 5, "name": "Entry Level Jobs Finder",     "url": "https://remote.jobmeter.app/tools/entry-level-finder" },
+                  { "@type": "ListItem", "position": 1, "name": "Remote Jobs Finder",         "url": "https://global.jobmeter.app/tools/remote-jobs-finder" },
+                  { "@type": "ListItem", "position": 2, "name": "Internship Finder",           "url": "https://global.jobmeter.app/tools/internship-finder" },
+                  { "@type": "ListItem", "position": 3, "name": "NYSC Jobs Finder",            "url": "https://global.jobmeter.app/tools/nysc-finder" },
+                  { "@type": "ListItem", "position": 4, "name": "Jobs with Visa Sponsorship",  "url": "https://global.jobmeter.app/tools/visa-finder" },
+                  { "@type": "ListItem", "position": 5, "name": "Entry Level Jobs Finder",     "url": "https://global.jobmeter.app/tools/entry-level-finder" },
                 ]
               }
             ])

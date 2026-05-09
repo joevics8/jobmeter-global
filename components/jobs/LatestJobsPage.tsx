@@ -434,7 +434,7 @@ export default function LatestJobsPage() {
       <OrganizationSchema />
       <WebSiteSchema 
         searchAction={{
-          target: 'https://remote.jobmeter.app/latest-jobs?q={search_term_string}',
+          target: 'https://global.jobmeter.app/latest-jobs?q={search_term_string}',
           queryInput: 'required name=search_term_string',
         }}
       />

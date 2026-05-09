@@ -172,7 +172,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   if (!page) return { title: 'Category Not Found | JobMeter' };
 
   const keywords = page.seo_keywords?.join(', ') || 'jobs, careers, employment';
-  const url = `https://remote.jobmeter.app/resources/${page.slug}`;
+  const url = `https://global.jobmeter.app/resources/${page.slug}`;
   const shouldAddNearMe =
     !!page.location && page.meta_title.length + ' (Hiring near me)'.length <= 70;
   const title = shouldAddNearMe ? `${page.meta_title} (Hiring near me)` : page.meta_title;
@@ -231,7 +231,7 @@ export default async function CategoryPage({ params }: { params: { slug: string 
     '@type': 'CollectionPage',
     name: page.h1_title,
     description: page.meta_description,
-    url: `https://remote.jobmeter.app/resources/${page.slug}`,
+    url: `https://global.jobmeter.app/resources/${page.slug}`,
     mainEntity: {
       '@type': 'ItemList',
       name: page.h1_title,
@@ -240,9 +240,9 @@ export default async function CategoryPage({ params }: { params: { slug: string 
     breadcrumb: {
       '@type': 'BreadcrumbList',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://remote.jobmeter.app' },
-        { '@type': 'ListItem', position: 2, name: 'Categories', item: 'https://remote.jobmeter.app/resources' },
-        { '@type': 'ListItem', position: 3, name: page.h1_title, item: `https://remote.jobmeter.app/resources/${page.slug}` },
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://global.jobmeter.app' },
+        { '@type': 'ListItem', position: 2, name: 'Categories', item: 'https://global.jobmeter.app/resources' },
+        { '@type': 'ListItem', position: 3, name: page.h1_title, item: `https://global.jobmeter.app/resources/${page.slug}` },
       ],
     },
   };

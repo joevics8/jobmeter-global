@@ -48,4 +48,4 @@ Disallow: /
 User-agent: node-fetch
 Disallow: /
 
-Sitemap: https://www.remote.jobmeter.app/sitemap.xml
+Sitemap: https://www.global.jobmeter.app/sitemap.xml

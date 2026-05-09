@@ -290,15 +290,15 @@ export default function NYSCFinderPage() {
               "@type": "WebPage",
               "name": "NYSC Jobs Finder — Find Job Vacancies for Corpers, PPA Opportunities & NYSC Internships 2026",
               "description": "Find NYSC jobs, corper job vacancies, PPA placements, NYSC internships, and post-service career opportunities across all sectors and states in Nigeria. The best NYSC job portal for corps members in 2026.",
-              "url": "https://remote.jobmeter.app/tools/nysc-finder",
+              "url": "https://global.jobmeter.app/tools/nysc-finder",
               "inLanguage": "en",
               "dateModified": new Date().toISOString().split('T')[0],
               "breadcrumb": {
                 "@type": "BreadcrumbList",
                 "itemListElement": [
-                  { "@type": "ListItem", "position": 1, "name": "Home",  "item": "https://remote.jobmeter.app" },
-                  { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://remote.jobmeter.app/tools" },
-                  { "@type": "ListItem", "position": 3, "name": "NYSC Jobs Finder", "item": "https://remote.jobmeter.app/tools/nysc-finder" },
+                  { "@type": "ListItem", "position": 1, "name": "Home",  "item": "https://global.jobmeter.app" },
+                  { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://global.jobmeter.app/tools" },
+                  { "@type": "ListItem", "position": 3, "name": "NYSC Jobs Finder", "item": "https://global.jobmeter.app/tools/nysc-finder" },
                 ]
               }
             },
@@ -309,7 +309,7 @@ export default function NYSCFinderPage() {
               "applicationCategory": "BusinessApplication",
               "operatingSystem": "Web",
               "description": "The best NYSC job portal for Nigerian corps members — aggregating verified NYSC job vacancies, PPA placements, corper internships, remote roles, and post-service career opportunities across all sectors and states in Nigeria, updated daily.",
-              "url": "https://remote.jobmeter.app/tools/nysc-finder",
+              "url": "https://global.jobmeter.app/tools/nysc-finder",
               "offers": {
                 "@type": "Offer",
                 "price": "0",
@@ -345,13 +345,13 @@ export default function NYSCFinderPage() {
               "@context": "https://schema.org",
               "@type": "ItemList",
               "name": "Related Job Finder Tools on Jobmeter",
-              "description": "Other free job finder tools available on remote.jobmeter.app",
+              "description": "Other free job finder tools available on global.jobmeter.app",
               "itemListElement": [
-                { "@type": "ListItem", "position": 1, "name": "Internship Finder",           "url": "https://remote.jobmeter.app/tools/internship-finder" },
-                { "@type": "ListItem", "position": 2, "name": "Graduate & Trainee Jobs",     "url": "https://remote.jobmeter.app/tools/graduate-trainee-finder" },
-                { "@type": "ListItem", "position": 3, "name": "Entry Level Jobs Finder",     "url": "https://remote.jobmeter.app/tools/entry-level-finder" },
-                { "@type": "ListItem", "position": 4, "name": "Remote Jobs Finder",          "url": "https://remote.jobmeter.app/tools/remote-jobs-finder" },
-                { "@type": "ListItem", "position": 5, "name": "Jobs with Accommodation",     "url": "https://remote.jobmeter.app/tools/accommodation-finder" },
+                { "@type": "ListItem", "position": 1, "name": "Internship Finder",           "url": "https://global.jobmeter.app/tools/internship-finder" },
+                { "@type": "ListItem", "position": 2, "name": "Graduate & Trainee Jobs",     "url": "https://global.jobmeter.app/tools/graduate-trainee-finder" },
+                { "@type": "ListItem", "position": 3, "name": "Entry Level Jobs Finder",     "url": "https://global.jobmeter.app/tools/entry-level-finder" },
+                { "@type": "ListItem", "position": 4, "name": "Remote Jobs Finder",          "url": "https://global.jobmeter.app/tools/remote-jobs-finder" },
+                { "@type": "ListItem", "position": 5, "name": "Jobs with Accommodation",     "url": "https://global.jobmeter.app/tools/accommodation-finder" },
               ]
             }
           ])

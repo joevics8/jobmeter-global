@@ -30,6 +30,22 @@ const GLOBAL_COUNTRY_CODES = new Set([
   'global',
 ]);
 
+// ─── Helper: derive a URL-safe country slug from a job record ─────────────────
+function getJobCountrySlug(job: any): string {
+  const countryArr: string[] = Array.isArray(job.country) ? job.country : [];
+  const first = countryArr.find((c) => c.toLowerCase() !== 'global');
+  if (first) {
+    return first.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+  }
+  if (job.location && typeof job.location === 'object') {
+    const c = job.location.country || job.location.countries?.[0];
+    if (c && c.toLowerCase() !== 'global') {
+      return c.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+    }
+  }
+  return 'global';
+}
+
 const getJob = cache(async (slug: string) => {
   const res = await fetch(
     `${SUPABASE_URL}/rest/v1/${JOBS_TABLE}?slug=eq.${slug}&select=*&limit=1`,
@@ -104,14 +120,22 @@ const getRelatedJobs = cache(async (currentJob: any) => {
   return (globalJobs.length >= 3 ? globalJobs : allJobs).slice(0, 10);
 });
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: { country: string; slug: string };
+}): Promise<Metadata> {
   const job = await getJob(params.slug);
   if (!job) return { title: 'Job Not Found' };
 
-  const companyName = typeof job.company === 'string' ? job.company : job.company?.name || 'Company';
+  const companyName =
+    typeof job.company === 'string' ? job.company : job.company?.name || 'Company';
   const titleCore = `${job.title} at ${companyName}`;
   const description = job.description?.replace(/<[^>]*>/g, '').slice(0, 160) || '';
   const isNoIndex = job.status === 'expired';
+
+  const countrySlug = getJobCountrySlug(job);
+  const canonicalUrl = `https://global.jobmeter.app/jobs/${countrySlug}/${job.slug || job.id}`;
 
   return {
     title: titleCore,
@@ -121,7 +145,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       description,
       type: 'website',
       siteName: 'JobMeter Global',
-      url: `https://global.jobmeter.app/jobs/${job.slug || job.id}`,
+      url: canonicalUrl,
     },
     twitter: {
       card: 'summary_large_image',
@@ -129,7 +153,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       description,
     },
     alternates: {
-      canonical: `https://global.jobmeter.app/jobs/${job.slug || job.id}`,
+      canonical: canonicalUrl,
     },
     robots: isNoIndex
       ? { index: false, follow: true }
@@ -137,7 +161,11 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-export default async function JobPage({ params }: { params: { slug: string } }) {
+export default async function JobPage({
+  params,
+}: {
+  params: { country: string; slug: string };
+}) {
   const job = await getJob(params.slug);
   if (!job) notFound();
 

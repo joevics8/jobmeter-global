@@ -174,7 +174,7 @@ export default function RemoteJobsPage() {
 
             <h3 className="text-xl font-bold text-gray-900 mt-8 mb-3">Benefits of Using Remote Jobs Finder Over Other Platforms</h3>
             <p className="text-gray-600 leading-relaxed mb-4">
-              Why choose Remote Jobs Finder over competitors like FlexJobs remote, LinkedIn remote jobs, or remote.co jobs? It combines the curation quality of FlexJobs with the intelligence of modern AI tools — minus the clutter and false listings.
+              Why choose Remote Jobs Finder over competitors like FlexJobs remote, LinkedIn remote jobs, or global.co jobs? It combines the curation quality of FlexJobs with the intelligence of modern AI tools — minus the clutter and false listings.
             </p>
             <ul className="list-disc pl-6 space-y-2 text-gray-600 mb-6">
               <li><strong>Time Savings:</strong> Receive 10–20 vetted remote employment opportunities daily instead of sifting through hundreds of irrelevant postings.</li>
@@ -254,15 +254,15 @@ export default function RemoteJobsPage() {
                 "@type": "WebPage",
                 "name": "Remote Jobs Finder — Find Remote Jobs, Work From Home Jobs & Online Remote Employment",
                 "description": "Use Remote Jobs Finder to discover legitimate remote jobs, work from home jobs, virtual assistant jobs, remote customer service jobs, and online remote employment opportunities worldwide. Entry-level and experienced roles available.",
-                "url": "https://remote.jobmeter.app/tools/remote-jobs-finder",
+                "url": "https://global.jobmeter.app/tools/remote-jobs-finder",
                 "inLanguage": "en",
                 "dateModified": new Date().toISOString().split('T')[0],
                 "breadcrumb": {
                   "@type": "BreadcrumbList",
                   "itemListElement": [
-                    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://remote.jobmeter.app" },
-                    { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://remote.jobmeter.app/tools" },
-                    { "@type": "ListItem", "position": 3, "name": "Remote Jobs Finder", "item": "https://remote.jobmeter.app/tools/remote-jobs-finder" },
+                    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://global.jobmeter.app" },
+                    { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://global.jobmeter.app/tools" },
+                    { "@type": "ListItem", "position": 3, "name": "Remote Jobs Finder", "item": "https://global.jobmeter.app/tools/remote-jobs-finder" },
                   ]
                 }
               },
@@ -273,7 +273,7 @@ export default function RemoteJobsPage() {
                 "applicationCategory": "BusinessApplication",
                 "operatingSystem": "Web",
                 "description": "AI-powered remote jobs finder tool for discovering work from home jobs, remote customer service jobs, virtual assistant jobs, remote data entry jobs, and legitimate remote employment opportunities worldwide.",
-                "url": "https://remote.jobmeter.app/tools/remote-jobs-finder",
+                "url": "https://global.jobmeter.app/tools/remote-jobs-finder",
                 "offers": {
                   "@type": "Offer",
                   "price": "0",
@@ -307,11 +307,11 @@ export default function RemoteJobsPage() {
                 "name": "Related Job Finder Tools",
                 "description": "Other free job finder tools available on the platform",
                 "itemListElement": [
-                  { "@type": "ListItem", "position": 1, "name": "Internship Finder", "url": "https://remote.jobmeter.app/tools/internship-finder" },
-                  { "@type": "ListItem", "position": 2, "name": "NYSC Jobs Finder", "url": "https://remote.jobmeter.app/tools/nysc-finder" },
-                  { "@type": "ListItem", "position": 3, "name": "Jobs with Accommodation Finder", "url": "https://remote.jobmeter.app/tools/accommodation-finder" },
-                  { "@type": "ListItem", "position": 4, "name": "Jobs with Visa Sponsorship Finder", "url": "https://remote.jobmeter.app/tools/visa-finder" },
-                  { "@type": "ListItem", "position": 5, "name": "Entry Level Jobs Finder", "url": "https://remote.jobmeter.app/tools/entry-level-finder" },
+                  { "@type": "ListItem", "position": 1, "name": "Internship Finder", "url": "https://global.jobmeter.app/tools/internship-finder" },
+                  { "@type": "ListItem", "position": 2, "name": "NYSC Jobs Finder", "url": "https://global.jobmeter.app/tools/nysc-finder" },
+                  { "@type": "ListItem", "position": 3, "name": "Jobs with Accommodation Finder", "url": "https://global.jobmeter.app/tools/accommodation-finder" },
+                  { "@type": "ListItem", "position": 4, "name": "Jobs with Visa Sponsorship Finder", "url": "https://global.jobmeter.app/tools/visa-finder" },
+                  { "@type": "ListItem", "position": 5, "name": "Entry Level Jobs Finder", "url": "https://global.jobmeter.app/tools/entry-level-finder" },
                 ]
               }
             ])

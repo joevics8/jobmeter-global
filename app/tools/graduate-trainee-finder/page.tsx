@@ -301,15 +301,15 @@ export default function GraduateTraineeFinderPage() {
                 "@type": "WebPage",
                 "name": "Graduate & Trainee Jobs Finder — Find Graduate Trainee Programs, Management Trainee Jobs & Tech Traineeships 2026",
                 "description": "Discover graduate trainee jobs, management trainee programs, software engineer traineeships, IT trainee programs, finance traineeships, and the best graduate training schemes in Nigeria and worldwide on Jobmeter.",
-                "url": "https://remote.jobmeter.app/tools/graduate-trainee-finder",
+                "url": "https://global.jobmeter.app/tools/graduate-trainee-finder",
                 "inLanguage": "en",
                 "dateModified": new Date().toISOString().split('T')[0],
                 "breadcrumb": {
                   "@type": "BreadcrumbList",
                   "itemListElement": [
-                    { "@type": "ListItem", "position": 1, "name": "Home",  "item": "https://remote.jobmeter.app" },
-                    { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://remote.jobmeter.app/tools" },
-                    { "@type": "ListItem", "position": 3, "name": "Graduate & Trainee Jobs Finder", "item": "https://remote.jobmeter.app/tools/graduate-trainee-finder" },
+                    { "@type": "ListItem", "position": 1, "name": "Home",  "item": "https://global.jobmeter.app" },
+                    { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://global.jobmeter.app/tools" },
+                    { "@type": "ListItem", "position": 3, "name": "Graduate & Trainee Jobs Finder", "item": "https://global.jobmeter.app/tools/graduate-trainee-finder" },
                   ]
                 }
               },
@@ -320,7 +320,7 @@ export default function GraduateTraineeFinderPage() {
                 "applicationCategory": "BusinessApplication",
                 "operatingSystem": "Web",
                 "description": "AI-powered job finder tool for discovering graduate trainee jobs, management trainee programs, software engineer traineeships, IT trainee programs, finance and accounting traineeships, and the best graduate training schemes in Nigeria and worldwide.",
-                "url": "https://remote.jobmeter.app/tools/graduate-trainee-finder",
+                "url": "https://global.jobmeter.app/tools/graduate-trainee-finder",
                 "offers": {
                   "@type": "Offer",
                   "price": "0",
@@ -354,13 +354,13 @@ export default function GraduateTraineeFinderPage() {
                 "@context": "https://schema.org",
                 "@type": "ItemList",
                 "name": "Related Job Finder Tools on Jobmeter",
-                "description": "Other free job finder tools available on remote.jobmeter.app",
+                "description": "Other free job finder tools available on global.jobmeter.app",
                 "itemListElement": [
-                  { "@type": "ListItem", "position": 1, "name": "Remote Jobs Finder",           "url": "https://remote.jobmeter.app/tools/remote-jobs-finder" },
-                  { "@type": "ListItem", "position": 2, "name": "Internship Finder",             "url": "https://remote.jobmeter.app/tools/internship-finder" },
-                  { "@type": "ListItem", "position": 3, "name": "NYSC Jobs Finder",              "url": "https://remote.jobmeter.app/tools/nysc-finder" },
-                  { "@type": "ListItem", "position": 4, "name": "Jobs with Visa Sponsorship",    "url": "https://remote.jobmeter.app/tools/visa-finder" },
-                  { "@type": "ListItem", "position": 5, "name": "Entry Level Jobs Finder",       "url": "https://remote.jobmeter.app/tools/entry-level-finder" },
+                  { "@type": "ListItem", "position": 1, "name": "Remote Jobs Finder",           "url": "https://global.jobmeter.app/tools/remote-jobs-finder" },
+                  { "@type": "ListItem", "position": 2, "name": "Internship Finder",             "url": "https://global.jobmeter.app/tools/internship-finder" },
+                  { "@type": "ListItem", "position": 3, "name": "NYSC Jobs Finder",              "url": "https://global.jobmeter.app/tools/nysc-finder" },
+                  { "@type": "ListItem", "position": 4, "name": "Jobs with Visa Sponsorship",    "url": "https://global.jobmeter.app/tools/visa-finder" },
+                  { "@type": "ListItem", "position": 5, "name": "Entry Level Jobs Finder",       "url": "https://global.jobmeter.app/tools/entry-level-finder" },
                 ]
               }
             ])

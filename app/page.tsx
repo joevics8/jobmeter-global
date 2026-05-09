@@ -5,7 +5,7 @@ import HomePage from '@/components/home/HomePage';
 import { OrganizationSchema, WebSiteSchema, BreadcrumbListSchema } from '@/components/seo/StructuredData';
 import { Metadata } from 'next';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.remote.jobmeter.app';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.global.jobmeter.app';
 
 export const metadata: Metadata = {
   title: 'JobMeter — Find Jobs That Match Your Skills & Experiences',

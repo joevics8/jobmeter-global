@@ -7,7 +7,7 @@ import AdUnit from '@/components/ads/AdUnit';
 
 export const revalidate = 86400; // Rebuild once per day
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.remote.jobmeter.app';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.global.jobmeter.app';
 const WORKER_URL = 'https://jobs-api.joevicspro.workers.dev';
 
 export const metadata: Metadata = {
